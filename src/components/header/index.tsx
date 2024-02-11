@@ -2,7 +2,7 @@ import { HeaderContainer } from "./style";
 import Navbar from "./navbar";
 import TrendingMovie from "./movieDetails";
 
-import background from "../../../assets/img/exampleBackground.png";
+import background from "../../assets/img/exampleBackground.png";
 
 const movie = {
   name: "Insider",

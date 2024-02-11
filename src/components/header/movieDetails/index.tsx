@@ -8,9 +8,9 @@ import {
   MovieInfo,
 } from "./style";
 
-import { Movie } from "../../../../types";
+import { Movie } from "../../../types";
 
-import heart from "../../../../assets/icons/heart.svg";
+import heart from "../../../assets/icons/heart.svg";
 
 const TrendingMovie = ({ movie }: { movie: Movie }) => (
   <Container>

@@ -1,7 +1,14 @@
-import Layout from "./components/Layout";
+import Layout from "./components";
+import Aside from "./layouts/Aside";
+import { FlexBox } from "./styles/globalStyles";
 
 const app = () => {
-  return <Layout />;
+  return (
+    <FlexBox>
+      <Aside />
+      <Layout />
+    </FlexBox>
+  );
 };
 
 export default app;

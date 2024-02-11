@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import theme from "../../../../styles/theme";
+import theme from "../../../styles/theme";
 
 export const NavContainer = styled.nav`
   display: flex;
@@ -10,6 +10,7 @@ export const NavContainer = styled.nav`
 
 export const MenuList = styled.ul`
   display: flex;
+  align-items: center;
   margin: 2.5rem 1.6rem;
   color: ${theme.colors.white};
   font-size: 1rem;
@@ -25,4 +26,8 @@ export const ProfileList = styled.ul`
   font-size: 1rem;
   font-weight: 500;
   gap: 20px;
+`;
+
+export const ToggleMenu = styled.img`
+  cursor: pointer;
 `;

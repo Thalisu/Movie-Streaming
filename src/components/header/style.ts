@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import theme from "../../../styles/theme";
+import theme from "../../styles/theme";
 
 export const HeaderContainer = styled.header<{ $background: string }>`
   display: flex;
   flex-direction: column;
   flex-shrink: 1;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   width: 100svw;
   height: 60svh;
