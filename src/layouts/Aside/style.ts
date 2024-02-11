@@ -17,4 +17,7 @@ export const Container = styled.div`
 
 export const ToggleMenu = styled.input`
   display: none;
+  &:checked + ${Container} {
+    width: 270px;
+  }
 `;

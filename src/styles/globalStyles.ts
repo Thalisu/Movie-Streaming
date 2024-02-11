@@ -10,10 +10,7 @@ ${resetCss}
  font-family: ${theme.fonts.poppins};
  text-rendering: optimizeSpeed;
 }
-
-#navbarMenu:checked + .navbarMenu {
-  width: 270px;
-}
+#id 
 `;
 
 export const FlexBox = styled.div`
