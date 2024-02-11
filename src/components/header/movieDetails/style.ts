@@ -7,14 +7,13 @@ export const Container = styled.div`
   justify-content: end;
   width: 100%;
   height: fit-content;
-  max-width: 1100px;
   margin: 2.5rem 0;
   gap: 30px;
 `;
 
 export const MovieInfoContainer = styled.div`
-  margin: 0 1.6rem;
-  color: ${theme.colors.white};
+  margin: 0 4rem;
+  color: ${theme.colors.white100};
 `;
 
 export const MovieTitle = styled.h2`
@@ -28,13 +27,13 @@ export const MovieInfo = styled.span`
 
 export const ButtonsContainer = styled.div`
   display: flex;
-  margin: 0 1.6rem;
+  margin: 0 4rem;
   gap: 10px;
 `;
 export const WatchButton = styled.button`
   width: 140px;
   height: 48px;
-  color: ${theme.colors.white};
+  color: ${theme.colors.white100};
   border-radius: 15px;
   background-color: ${theme.colors.purple};
 `;

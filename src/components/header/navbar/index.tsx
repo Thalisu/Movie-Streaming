@@ -1,4 +1,11 @@
-import { NavContainer, MenuList, ProfileList, ToggleMenu } from "./style";
+import {
+  NavContainer,
+  MenuList,
+  ProfileList,
+  ToggleMenu,
+  Icons,
+  Anchor,
+} from "./style";
 
 import searchIcon from "../../../assets/icons/search.svg";
 import bellIcon from "../../../assets/icons/bell.svg";
@@ -9,25 +16,25 @@ const Navbar = () => {
       <MenuList>
         <li>
           <label htmlFor="navbarMenu">
-            <ToggleMenu src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAQAAAAm93DmAAAASElEQVR42mNgGAWjYFCB//n/55MJ47EbSD54j93Ahv/3yYQFo/E7CkZzymhOGQW0yBCM1M8pCdTOKe+olVPuQeFoThkFwx0AAKIX6gZTeyisAAAAAElFTkSuQmCC" />
+            <ToggleMenu />
           </label>
         </li>
         <li>
-          <a href="">Movies</a>
+          <Anchor href="">Movies</Anchor>
         </li>
         <li>
-          <a href="">Series</a>
+          <Anchor href="">Series</Anchor>
         </li>
         <li>
-          <a href="">Documentaries</a>
+          <Anchor href="">Documentaries</Anchor>
         </li>
       </MenuList>
       <ProfileList>
         <li>
-          <img src={searchIcon} alt="search" />
+          <Icons src={searchIcon} alt="search" />
         </li>
         <li>
-          <img src={bellIcon} alt="notifications" />
+          <Icons src={bellIcon} alt="notifications" />
         </li>
         <li>
           <div>

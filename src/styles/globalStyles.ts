@@ -12,10 +12,11 @@ ${resetCss}
 }
 
 #navbarMenu:checked + .navbarMenu {
-  width: 30svw;
+  width: 270px;
 }
 `;
 
 export const FlexBox = styled.div`
   display: flex;
+  width: 100svw;
 `;
