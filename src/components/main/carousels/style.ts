@@ -1,16 +1,22 @@
 import styled from "styled-components";
 import theme from "../../../styles/theme";
 
-export const CarouselContainer = styled.ul<{ ref: unknown }>`
+export const CarouselContainer = styled.ul<{
+  ref: unknown;
+  $isDragging: boolean;
+}>`
   display: flex;
   align-items: center;
   gap: 20px;
   overflow-x: hidden;
+  scroll-behavior: ${({ $isDragging }) => ($isDragging ? "none" : "smooth")};
 `;
 
 export const Card = styled.li<{ $first?: boolean }>`
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: center;
   width: 250px;
   min-width: 250px;
   height: 300px;
