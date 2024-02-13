@@ -7,10 +7,23 @@ export const HeaderContainer = styled.header<{ $background: string }>`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 60svh;
+  height: 80svh;
   background-color: ${theme.colors.purple};
   background-image: ${({ $background }) => `url(${$background})`};
   background-size: cover;
   background-position: center;
-  box-shadow: inset 0px 70px 50px 0px rgba(0, 0, 0, 0.7);
+  z-index: 1;
+  &::before {
+    content: "";
+    position: absolute;
+    width: inherit;
+    height: 200px;
+    bottom: 20svh;
+    z-index: 1;
+    background: linear-gradient(
+      360deg,
+      rgba(0, 0, 0, 1) 30%,
+      rgba(0, 0, 0, 0) 100%
+    );
+  }
 `;

@@ -10,7 +10,6 @@ ${resetCss}
  font-family: ${theme.fonts.poppins};
  text-rendering: optimizeSpeed;
 }
-#id 
 `;
 
 export const FlexBox = styled.div`

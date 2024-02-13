@@ -1,5 +1,11 @@
-import { Container } from "./style";
+import Carousel from "./carousels";
+import { Container, Tag } from "./style";
 
-const Main = () => <Container />;
+const Main = () => (
+  <Container>
+    <Tag>Trending</Tag>
+    <Carousel />
+  </Container>
+);
 
 export default Main;
