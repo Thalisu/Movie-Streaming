@@ -90,7 +90,7 @@ select {
   padding: 0;
   vertical-align: baseline;
   text-decoration: inherit;
-  z-index: 2;
+  z-index: 0;
 }
 button:focus {
   outline: none;

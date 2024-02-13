@@ -14,5 +14,6 @@ ${resetCss}
 
 export const FlexBox = styled.div`
   display: flex;
-  width: 100svw;
+  width: 100%;
+  max-width: 100svw;
 `;

@@ -4,9 +4,4 @@ export interface Movie {
   gender: string;
   seasons: number;
 }
-
-export interface ScrollData {
-  isDragging: boolean;
-  startX: number;
-  startScrollLeftPos: number;
-}
+export 

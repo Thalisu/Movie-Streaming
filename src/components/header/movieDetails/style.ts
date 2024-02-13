@@ -8,6 +8,7 @@ export const Container = styled.div`
   width: 100%;
   height: fit-content;
   margin: 2.5rem 0;
+  z-index: 2;
   gap: 30px;
 `;
 

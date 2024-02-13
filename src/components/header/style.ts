@@ -3,6 +3,7 @@ import theme from "../../styles/theme";
 
 export const HeaderContainer = styled.header<{ $background: string }>`
   display: flex;
+  position: relative;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
@@ -12,13 +13,14 @@ export const HeaderContainer = styled.header<{ $background: string }>`
   background-image: ${({ $background }) => `url(${$background})`};
   background-size: cover;
   background-position: center;
-  z-index: 1;
-  &::before {
+  z-index: 0;
+  flex-shrink: 1;
+  &::after {
     content: "";
     position: absolute;
-    width: inherit;
+    width: 100%;
     height: 200px;
-    bottom: 20svh;
+    bottom: 0;
     z-index: 1;
     background: linear-gradient(
       360deg,

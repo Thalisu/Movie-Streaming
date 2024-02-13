@@ -13,10 +13,12 @@ const movie = {
 
 const Header = (): JSX.Element => {
   return (
-    <HeaderContainer $background={background}>
-      <Navbar />
-      <TrendingMovie movie={movie} />
-    </HeaderContainer>
+    <>
+      <HeaderContainer $background={background}>
+        <Navbar />
+        <TrendingMovie movie={movie} />
+      </HeaderContainer>
+    </>
   );
 };
 

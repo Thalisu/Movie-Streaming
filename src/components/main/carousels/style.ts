@@ -12,7 +12,7 @@ export const CarouselContainer = styled.ul<{
   scroll-behavior: ${({ $isDragging }) => ($isDragging ? "none" : "smooth")};
 `;
 
-export const Card = styled.li<{ $first?: boolean }>`
+export const Card = styled.li<{ $first?: boolean; ref?: unknown }>`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -55,7 +55,7 @@ export const CarouselController = styled.button<{ $right?: boolean }>`
 export const VisibleArea = styled.div`
   display: flex;
   align-items: center;
-  width: 100svw;
+  width: 100%;
   height: fit-content;
   &:hover ${CarouselController} {
     opacity: 1;
