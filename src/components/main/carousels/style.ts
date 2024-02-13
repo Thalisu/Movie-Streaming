@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import theme from "../../../styles/theme";
 
-export const CarouselContainer = styled.ul`
+export const CarouselContainer = styled.ul<{ ref: unknown }>`
   display: flex;
   align-items: center;
   gap: 20px;
-  overflow-x: scroll;
+  overflow-x: hidden;
 `;
 
 export const Card = styled.li<{ $first?: boolean }>`
@@ -18,6 +18,7 @@ export const Card = styled.li<{ $first?: boolean }>`
   border: 1px solid ${theme.colors.gray};
   ${({ $first }) => $first && "margin: 0 0 0 4rem"};
   border-radius: 25px;
+  user-select: none;
 `;
 
 export const Button = styled.img<{ $right?: boolean }>`
@@ -41,7 +42,7 @@ export const CarouselController = styled.button<{ $right?: boolean }>`
       : theme.colors.leftCarouselGradient};
   opacity: 0;
   &:hover ${Button} {
-    transform: scale(1.2);
+    transform: ${({ $right }) => $right && "rotate(180deg)"} scale(1.3);
   }
 `;
 
