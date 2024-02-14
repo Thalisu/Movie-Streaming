@@ -1,5 +1,4 @@
 import { HeaderContainer } from "./style";
-import Navbar from "./navbar";
 import TrendingMovie from "./movieDetails";
 
 import background from "../../assets/img/exampleBackground.png";
@@ -15,7 +14,6 @@ const Header = (): JSX.Element => {
   return (
     <>
       <HeaderContainer $background={background}>
-        <Navbar />
         <TrendingMovie movie={movie} />
       </HeaderContainer>
     </>

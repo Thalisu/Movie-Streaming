@@ -10,10 +10,15 @@ ${resetCss}
  font-family: ${theme.fonts.poppins};
  text-rendering: optimizeSpeed;
 }
+.removeScroll {
+  height: 100svh;
+  overflow: hidden;
+}
 `;
 
 export const FlexBox = styled.div`
   display: flex;
-  width: 100%;
+  flex-direction: column;
+  width: 100svw;
   max-width: 100svw;
 `;

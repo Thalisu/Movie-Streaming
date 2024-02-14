@@ -1,13 +1,16 @@
-import Layout from "./components";
+import Header from "./components/moviesBanner";
+import Main from "./components/main";
+import Navbar from "./components/navbar";
 import Aside from "./layouts/Aside";
-import { FlexBox } from "./styles/globalStyles";
 
 const app = () => {
   return (
-    <FlexBox>
+    <>
       <Aside />
-      <Layout />
-    </FlexBox>
+      <Navbar />
+      <Header />
+      <Main />
+    </>
   );
 };
 

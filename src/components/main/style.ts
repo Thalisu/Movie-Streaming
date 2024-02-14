@@ -5,10 +5,11 @@ export const Container = styled.main`
   display: flex;
   position: relative;
   flex-direction: column;
-  width: 100%;
+  width: 100svw;
   height: 200svh;
   background-image: ${theme.colors.darkGradient};
   flex-shrink: 99;
+  z-index: 0;
   &::before {
     content: "";
     position: absolute;

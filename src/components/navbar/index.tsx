@@ -7,12 +7,19 @@ import {
   Anchor,
 } from "./style";
 
-import searchIcon from "../../../assets/icons/search.svg";
-import bellIcon from "../../../assets/icons/bell.svg";
+import searchIcon from "../../assets/icons/search.svg";
+import bellIcon from "../../assets/icons/bell.svg";
+import { useEffect, useState } from "react";
 
 const Navbar = () => {
+  const [scroll, setScroll] = useState(0);
+
+  useEffect(() => {
+    addEventListener("scroll", () => setScroll(scrollY));
+  });
+
   return (
-    <NavContainer>
+    <NavContainer $scrollY={scroll}>
       <MenuList>
         <li>
           <label htmlFor="navbarMenu">

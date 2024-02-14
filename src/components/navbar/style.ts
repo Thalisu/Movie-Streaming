@@ -1,11 +1,18 @@
 import styled from "styled-components";
-import theme from "../../../styles/theme";
-import MenuButton from "../../../layouts/menuButton/menuButton";
+import theme from "../../styles/theme";
+import MenuButton from "../../layouts/menuButton/menuButton";
 
-export const NavContainer = styled.nav`
+export const NavContainer = styled.nav<{ $scrollY: number }>`
+  position: fixed;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  z-index: 10;
   width: 100%;
+  height: 80px;
+  transition: background-color 0.2s;
+  background-color: ${({ $scrollY }) =>
+    $scrollY >= 80 ? "rgba(15, 15, 15, 0.9)" : "transparent"};
 `;
 
 export const MenuList = styled.ul`

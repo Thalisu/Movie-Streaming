@@ -1,13 +1,13 @@
 import styled from "styled-components";
 import theme from "../../styles/theme";
 
-export const HeaderContainer = styled.header<{ $background: string }>`
+export const HeaderContainer = styled.div<{ $background: string }>`
   display: flex;
   position: relative;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: end;
   align-items: center;
-  width: 100%;
+  width: 100svw;
   height: 80svh;
   background-color: ${theme.colors.purple};
   background-image: ${({ $background }) => `url(${$background})`};
