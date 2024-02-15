@@ -1,23 +1,31 @@
-import { HeaderContainer } from "./style";
-import TrendingMovie from "./movieDetails";
+import {
+  Container,
+  ButtonsContainer,
+  WatchButton,
+  LikeButton,
+  MovieInfoContainer,
+  MovieTitle,
+  MovieInfo,
+} from "./style";
 
-import background from "../../assets/img/exampleBackground.png";
+import heart from "../../../assets/icons/heart.svg";
 
-const movie = {
-  name: "Insider",
-  launch: 2022,
-  gender: "Comedy horror",
-  seasons: 1,
-};
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const TrendingMovie = ({ movie }: { movie: any }) => (
+  <Container>
+    <MovieInfoContainer>
+      <MovieTitle>{movie.name}</MovieTitle>
+      <MovieInfo>
+        {movie.launch} | {movie.gender} | {movie.seasons} Season
+      </MovieInfo>
+    </MovieInfoContainer>
+    <ButtonsContainer>
+      <WatchButton>Watch now</WatchButton>
+      <LikeButton>
+        <img src={heart} alt="Like" />
+      </LikeButton>
+    </ButtonsContainer>
+  </Container>
+);
 
-const Header = (): JSX.Element => {
-  return (
-    <>
-      <HeaderContainer $background={background}>
-        <TrendingMovie movie={movie} />
-      </HeaderContainer>
-    </>
-  );
-};
-
-export default Header;
+export default TrendingMovie;

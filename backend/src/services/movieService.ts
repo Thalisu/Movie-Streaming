@@ -10,7 +10,7 @@ export const getMovies = async (quantity: number, url: string) => {
   }
 
   const pages = Math.ceil(quantity / 19);
-  let result: Movie[] = [];
+  const result: Movie[] = [];
 
   for (let i = 1; i <= pages; i++) {
     const { data } = await axios.get<MoviesResult>(`${url}&page=${i}`);

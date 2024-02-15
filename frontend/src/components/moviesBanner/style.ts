@@ -1,31 +1,49 @@
 import styled from "styled-components";
 import theme from "../../styles/theme";
 
-export const HeaderContainer = styled.div<{ $background: string }>`
+export const Container = styled.div`
   display: flex;
-  position: relative;
   flex-direction: column;
   justify-content: end;
-  align-items: center;
-  width: 100svw;
-  height: 80svh;
+  width: 100%;
+  height: fit-content;
+  margin: 2.5rem 0;
+  z-index: 2;
+  gap: 30px;
+`;
+
+export const MovieInfoContainer = styled.div`
+  margin: 0 4rem;
+  color: ${theme.colors.white100};
+`;
+
+export const MovieTitle = styled.h2`
+  font-size: 3rem;
+  font-weight: 600;
+`;
+
+export const MovieInfo = styled.span`
+  font-size: 0.875rem;
+`;
+
+export const ButtonsContainer = styled.div`
+  display: flex;
+  margin: 0 4rem;
+  gap: 10px;
+`;
+export const WatchButton = styled.button`
+  width: 140px;
+  height: 48px;
+  color: ${theme.colors.white100};
+  border-radius: 15px;
   background-color: ${theme.colors.purple};
-  background-image: ${({ $background }) => `url(${$background})`};
-  background-size: cover;
-  background-position: center;
-  z-index: 0;
-  flex-shrink: 1;
-  &::after {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 200px;
-    bottom: 0;
-    z-index: 1;
-    background: linear-gradient(
-      360deg,
-      rgba(0, 0, 0, 1) 30%,
-      rgba(0, 0, 0, 0) 100%
-    );
-  }
+`;
+export const LikeButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 15px;
+  background-image: ${theme.colors.whiteLinearGradient};
 `;

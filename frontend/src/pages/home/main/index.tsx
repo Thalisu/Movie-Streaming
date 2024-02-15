@@ -1,4 +1,4 @@
-import Carousel from "./carousels";
+import Carousel from "../../../components/carousel";
 import { Container, Tag } from "./style";
 
 const Main = () => (

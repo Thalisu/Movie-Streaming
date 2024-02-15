@@ -1,5 +1,5 @@
-import Header from "./components/moviesBanner";
-import Main from "./components/main";
+import Header from "./pages/home/header";
+import Main from "./pages/home/main";
 import Navbar from "./components/navbar";
 import Aside from "./components/Aside";
 

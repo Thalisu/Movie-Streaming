@@ -6,30 +6,32 @@ import { getMovies } from "../services/movieService";
 
 const moviesRouter = Router();
 
+// eslint-disable-next-line @typescript-eslint/no-misused-promises
 moviesRouter.get("/trending/:time/:quantity/:after?", async (req, res) => {
   const time = parseTime(req.params.time);
-  const quantity = parseNumber(req.params.quantity) + 1;
+  const quantity = parseNumber(req.params.quantity);
 
   const url = `${config.BASE_URL}trending/movie/${time}?api_key=${config.API_KEY}`;
 
   /*   if (isNumber(req.params.after)) info("todo"); */
 
-  const response = await getMovies(quantity, url);
+  const filteredData = await getMovies(quantity, url);
 
-  res.json(response);
+  res.json(filteredData);
 });
 
+// eslint-disable-next-line @typescript-eslint/no-misused-promises
 moviesRouter.get("/:type/:quantity/:after?", async (req, res) => {
   const type = parseType(req.params.type);
-  const quantity = parseNumber(req.params.quantity) + 1;
+  const quantity = parseNumber(req.params.quantity);
 
   const url = `${config.BASE_URL}movie/${type}?api_key=${config.API_KEY}`;
 
   /*   if (isNumber(req.params.after)) info("todo"); */
 
-  const response = await getMovies(quantity, url);
+  const filteredData = await getMovies(quantity, url);
 
-  res.json(response);
+  res.json(filteredData);
 });
 
 export default moviesRouter;

@@ -25,6 +25,6 @@
   },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "project": "./backend/tsconfig.json"
+    "project": "./MovieStreamingWebApp/backend/tsconfig.json"
   }
 }
