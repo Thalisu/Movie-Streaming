@@ -15,6 +15,10 @@ const theme = {
       "linear-gradient(1.5708rad,rgba(0,0,0, 0) 0%,rgba(0,0,0, 0.5) 100%)",
     leftCarouselGradient:
       "linear-gradient(1.5708rad,rgba(0,0,0, 0.5) 0%,rgba(0,0,0, 0) 100%)",
+    rightCarouselGradientLow:
+      "linear-gradient(1.5708rad,rgba(0,0,0, 0) 0%,rgba(0,0,0, 0.2) 100%)",
+    leftCarouselGradientLow:
+      "linear-gradient(1.5708rad,rgba(0,0,0, 0.2) 0%,rgba(0,0,0, 0) 100%)",
     darkTextColor: "#000000",
     whiteTextColor: "#ffffff",
   },

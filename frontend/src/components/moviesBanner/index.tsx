@@ -8,15 +8,16 @@ import {
   MovieInfo,
 } from "./style";
 
-import heart from "../../../assets/icons/heart.svg";
+import heart from "../../assets/icons/heart.svg";
+import { Movie } from "../../types";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const TrendingMovie = ({ movie }: { movie: any }) => (
+const TrendingMovie = ({ movie }: { movie: Movie }) => (
   <Container>
     <MovieInfoContainer>
-      <MovieTitle>{movie.name}</MovieTitle>
+      <MovieTitle>{movie.title}</MovieTitle>
       <MovieInfo>
-        {movie.launch} | {movie.gender} | {movie.seasons} Season
+        {movie.release_date.substring(0, 4)} | {movie.genres}
       </MovieInfo>
     </MovieInfoContainer>
     <ButtonsContainer>

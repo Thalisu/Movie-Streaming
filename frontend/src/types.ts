@@ -9,3 +9,10 @@ export interface Movie {
   popularity: number;
   id: number;
 }
+
+export enum Type {
+  Popular = "popular",
+  Top_rated = "top_rated",
+  Upcoming = "upcoming",
+  Latest = "latest",
+}

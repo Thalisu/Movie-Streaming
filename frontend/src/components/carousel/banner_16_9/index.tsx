@@ -1,4 +1,4 @@
-import useCarousel from "../../hooks/useCarousel";
+import useCarousel from "../../../hooks/useCarousel";
 import {
   VisibleArea,
   CarouselContainer,
@@ -7,13 +7,14 @@ import {
 } from "./style";
 
 import arrow from "../../../assets/icons/arrow.svg";
-import Cards from "./Cards";
+import BannerCarousel from "./Banner";
 
-const Carousel = () => {
+const Carousel16_9 = () => {
   const carousel = useCarousel();
 
   return (
     <VisibleArea
+      className="visiblea"
       onMouseDown={(event) => carousel.dragStart(event)}
       onMouseUp={() => carousel.dragStop()}
       onMouseMove={(event) => carousel.dragging(event)}
@@ -25,7 +26,7 @@ const Carousel = () => {
         <Button src={arrow} />
       </CarouselController>
       <CarouselContainer ref={carousel.carouselRef}>
-        <Cards cardRef={carousel.cardRef} />
+        <BannerCarousel BannerRef={carousel.cardRef} />
       </CarouselContainer>
       <CarouselController
         $right={true}
@@ -38,4 +39,4 @@ const Carousel = () => {
   );
 };
 
-export default Carousel;
+export default Carousel16_9;

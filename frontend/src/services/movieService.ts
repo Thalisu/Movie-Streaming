@@ -1,11 +1,18 @@
 import axios from "axios";
-import { Obj } from "../types";
+import { Movie } from "../types";
 const baseUrl = "http://localhost:3003/api";
 
-const getMovies = async (time: string, quantity: number, after?: number) => {
-  const { data } = await axios.get<Obj[]>(
-    `${baseUrl}/movies/trending/${time}/${quantity}/${after}`
+const getMovies = async (quantity: number, type?: string, time?: string) => {
+  if (time) {
+    const { data } = await axios.get<Movie[]>(
+      `${baseUrl}/movies/trending/${time}/${quantity}`
+    );
+    return data;
+  }
+  const { data } = await axios.get<Movie[]>(
+    `${baseUrl}/movies/${type}/${quantity}`
   );
+  console.log(data);
   return data;
 };
 

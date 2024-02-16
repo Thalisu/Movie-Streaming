@@ -4,7 +4,6 @@ export enum Time {
 }
 
 export enum Type {
-  Trending = "trending",
   Popular = "popular",
   Top_rated = "top_rated",
   Upcoming = "upcoming",
