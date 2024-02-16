@@ -17,11 +17,7 @@ export const Container = styled.main`
     height: 200px;
     top: 0;
     z-index: 0;
-    background: linear-gradient(
-      180deg,
-      rgba(0, 0, 0, 1) 30%,
-      rgba(0, 0, 0, 0) 100%
-    );
+    background: ${theme.colors.cascadeDownGradient};
   }
 `;
 

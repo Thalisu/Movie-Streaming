@@ -12,7 +12,6 @@ const getMovies = async (quantity: number, type?: string, time?: string) => {
   const { data } = await axios.get<Movie[]>(
     `${baseUrl}/movies/${type}/${quantity}`
   );
-  console.log(data);
   return data;
 };
 

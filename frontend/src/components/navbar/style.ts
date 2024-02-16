@@ -11,14 +11,9 @@ export const NavContainer = styled.nav<{ $scrollY: number }>`
   width: 100%;
   height: 80px;
   transition: background-color 0.2s;
-  background: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0.5) 0%,
-    rgba(0, 0, 0, 0) 100%
-  );
+  background: ${({ $scrollY }) =>
+    $scrollY >= 80 ? "rgba(15, 15, 15, 0.9)" : theme.colors.lowerCascadeDown};
 `;
-/* background-color: ${({ $scrollY }) =>
-$scrollY >= 80 ? "rgba(15, 15, 15, 0.9)" : "transparent"}; */
 
 export const MenuList = styled.ul`
   display: flex;

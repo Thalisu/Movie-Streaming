@@ -18,8 +18,10 @@ export const CarouselContainer = styled.ul<{
 `;
 
 export const Button = styled.img<{ $right?: boolean }>`
-  opacity: 1;
-  ${({ $right }) => $right && "transform: rotate(180deg)"}
+  opacity: 0.5;
+  filter: drop-shadow(-0.5px -0.5px 0 black) drop-shadow(0.5px 0.5px 0 black)
+    drop-shadow(0.5px -0.5px 0 black) drop-shadow(-0.5px 0.5px 0 black);
+  ${({ $right }) => $right && "transform: rotate(180deg);"};
 `;
 
 export const CarouselController = styled.button<{
@@ -35,10 +37,6 @@ export const CarouselController = styled.button<{
   width: 5vw;
   height: inherit;
 
-  background-image: ${({ $right }) =>
-    $right
-      ? theme.colors.rightCarouselGradientLow
-      : theme.colors.leftCarouselGradientLow};
   opacity: 0;
   cursor: pointer;
   visibility: visible;
@@ -67,6 +65,7 @@ export const VisibleArea = styled.div`
 `;
 
 export const Banner = styled.li`
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: end;
@@ -74,6 +73,15 @@ export const Banner = styled.li`
   height: 100%;
   background-color: ${theme.colors.background};
   cursor: pointer;
+  &::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 500px;
+    bottom: 0;
+    z-index: 1;
+    background: ${theme.colors.cascadeUpGradient};
+  }
 `;
 export const BannerImg = styled.img`
   position: relative;

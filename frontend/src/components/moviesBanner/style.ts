@@ -21,6 +21,7 @@ export const MovieInfoContainer = styled.div`
 export const MovieTitle = styled.h2`
   font-size: 3rem;
   font-weight: 600;
+  margin-bottom: 3px;
 `;
 
 export const MovieInfo = styled.span`

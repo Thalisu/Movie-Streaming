@@ -27,7 +27,7 @@ const BannerCarousel = ({
               loading="lazy"
               onLoad={(event) => loadedImgFadeIn(event)}
             />
-            {/*             <TrendingMovie movie={movie} /> */}
+            <TrendingMovie movie={movie} />
           </Banner>
         );
       })}

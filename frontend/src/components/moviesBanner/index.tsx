@@ -17,7 +17,8 @@ const TrendingMovie = ({ movie }: { movie: Movie }) => (
     <MovieInfoContainer>
       <MovieTitle>{movie.title}</MovieTitle>
       <MovieInfo>
-        {movie.release_date.substring(0, 4)} | {movie.genres}
+        {movie.release_date.substring(0, 4)} |{" "}
+        {movie.genres.map((g, i) => (i !== 0 ? `, ${g}` : `${g}`))}
       </MovieInfo>
     </MovieInfoContainer>
     <ButtonsContainer>
