@@ -1,22 +1,6 @@
 import styled from "styled-components";
 import theme from "../../../styles/theme";
 
-export const CarouselContainer = styled.ul<{
-  ref: unknown;
-}>`
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  width: 100%;
-  overflow-x: hidden;
-  scroll-behavior: smooth;
-  &.dragging {
-    scroll-behavior: auto;
-    cursor: grab;
-    user-select: none;
-  }
-`;
-
 export const Button = styled.img<{ $right?: boolean }>`
   opacity: 1;
   ${({ $right }) => $right && "transform: rotate(180deg)"}
@@ -66,20 +50,35 @@ export const VisibleArea = styled.div`
   }
 `;
 
-export const Card = styled.li<{
+export const CarouselContainer = styled.ul<{
+  ref: unknown;
+}>`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 20px;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  &.dragging {
+    scroll-behavior: auto;
+    cursor: grab;
+    user-select: none;
+  }
+`;
+
+export const Card = styled.div<{
   $first?: boolean;
   ref?: unknown;
 }>`
+  position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: start;
-  align-items: start;
-  width: 200px;
-  aspect-ratio: 2/3;
-  border: 3px solid transparent;
+  justify-content: end;
+  width: 300px;
+  aspect-ratio: 16 / 9;
+  border: 3px solid rgba(0, 0, 0, 0);
   ${({ $first }) => $first && "margin: 0 0 0 4rem"};
-  border-radius: 25px;
-  transition: outline 0.2s;
+  transition: border 0.2s;
   cursor: pointer;
   &:hover {
     border: 3px solid ${theme.colors.purple};
@@ -87,7 +86,6 @@ export const Card = styled.li<{
 `;
 
 export const CardImg = styled.img`
-  border-radius: 25px;
   width: 100%;
   opacity: 0;
   transition: opacity 0.3s;
@@ -101,16 +99,20 @@ export const FinalCard = styled.li`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 200px;
-  aspect-ratio: 2/3;
+  width: 300px;
+  aspect-ratio: 16 / 9;
   background-color: rgba(0, 0, 0, 0.3);
-  border: 3px solid transparent;
-  border-radius: 25px;
-  transition: outline 0.2s;
+  border: 3px solid rgba(0, 0, 0, 0);
+  transition: border 0.2s;
   color: rgba(255, 255, 255, 0.5);
   font-size: 22;
   cursor: pointer;
   &:hover {
     border: 3px solid ${theme.colors.purple};
   }
+`;
+
+export const Title = styled.p`
+  color: ${theme.colors.white70};
+  margin-top: 5px;
 `;

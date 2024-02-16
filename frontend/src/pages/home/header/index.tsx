@@ -1,7 +1,7 @@
 /* import TrendingMovie from "../../../components/moviesBanner"; */
 
 /* import background from "../../../assets/img/exampleBackground.png"; */
-import Carousel16_9 from "../../../components/carousel/banner_16_9";
+import Carousel from "../../../components/carousel/headerBanner";
 import { HeaderContainer } from "./style";
 
 /* const movie = {
@@ -14,7 +14,7 @@ import { HeaderContainer } from "./style";
 const Header = (): JSX.Element => {
   return (
     <HeaderContainer>
-      <Carousel16_9 />
+      <Carousel />
     </HeaderContainer>
   );
 };

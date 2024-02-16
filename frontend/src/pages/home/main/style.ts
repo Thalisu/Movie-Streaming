@@ -6,7 +6,7 @@ export const Container = styled.main`
   position: relative;
   flex-direction: column;
   width: 100svw;
-  height: 200svh;
+  padding-bottom:4rem;
   background-image: ${theme.colors.darkGradient};
   flex-shrink: 99;
   z-index: 0;
@@ -22,8 +22,8 @@ export const Container = styled.main`
 `;
 
 export const Tag = styled.h4`
-  margin: 2rem 1rem 1rem 4rem;
-  font-size: 20;
+  margin: 2rem 1rem 0.5rem 4rem;
+  font-size: 20px;
   font-weight: 600;
   color: ${theme.colors.white100};
 `;

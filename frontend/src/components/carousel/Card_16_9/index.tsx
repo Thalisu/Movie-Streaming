@@ -9,7 +9,7 @@ import {
 import arrow from "../../../assets/icons/arrow.svg";
 import Cards from "./Card";
 
-const Carousel_2_3 = () => {
+const Carousel_16_9 = () => {
   const carousel = useCarousel();
 
   return (
@@ -41,4 +41,4 @@ const Carousel_2_3 = () => {
   );
 };
 
-export default Carousel_2_3;
+export default Carousel_16_9;

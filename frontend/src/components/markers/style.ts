@@ -18,8 +18,13 @@ export const Dots = styled.li`
   opacity: 0.5;
   border-radius: 50%;
   transition: opacity 0.3s;
-  cursor: pointer;
   &.current {
     opacity: 1;
+  }
+  &:not(.current) {
+    cursor: pointer;
+    &:hover {
+      outline: 1px solid white;
+    }
   }
 `;

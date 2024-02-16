@@ -11,7 +11,7 @@ import arrow from "../../../assets/icons/arrow.svg";
 import BannerCarousel from "./Banner";
 import Markers from "../../markers/Markers";
 
-const Carousel16_9 = () => {
+const Carousel = () => {
   const carousel = useCarousel();
 
   return (
@@ -47,4 +47,4 @@ const Carousel16_9 = () => {
   );
 };
 
-export default Carousel16_9;
+export default Carousel;

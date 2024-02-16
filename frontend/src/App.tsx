@@ -2,6 +2,7 @@ import Header from "./pages/home/header";
 import Main from "./pages/home/main";
 import Navbar from "./components/navbar";
 import Aside from "./components/Aside";
+import Footer from "./pages/home/footer";
 
 const App = () => {
   return (
@@ -10,6 +11,7 @@ const App = () => {
       <Navbar />
       <Header />
       <Main />
+      <Footer />
     </>
   );
 };
