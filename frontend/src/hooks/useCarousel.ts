@@ -3,40 +3,114 @@ import { useRef } from "react";
 const useCarousel = () => {
   const carouselRef = useRef(null);
   const cardRef = useRef(null);
+  const markerRef = useRef(null);
   const leftControllerRef = useRef(null);
   const rightControllerRef = useRef(null);
+
   const scrollDataRef = useRef({
     isDragging: false,
     startX: 0,
-    startScrollLeftPos: 0,
+    PrevScrollPos: 0,
+    prevMarker: 0,
+    gapValue: 0,
   });
 
-  if (
-    scrollDataRef.current.startScrollLeftPos < 100 &&
-    leftControllerRef.current !== null
-  ) {
-    const controller: HTMLElement = leftControllerRef.current;
-    controller.classList.add("start");
-  }
+  const dragStart = (e: React.MouseEvent) => {
+    if (carouselRef.current === null) return null;
 
-  const removeLeftControllerClass = (carouselPos: number) => {
-    if (carouselPos < 200 && leftControllerRef.current !== null) {
-      const controller: HTMLElement = leftControllerRef.current;
-      controller.classList.add("start");
-    } else if (leftControllerRef.current !== null) {
-      const controller: HTMLElement = leftControllerRef.current;
-      controller.classList.remove("start");
-    }
+    const carousel: HTMLElement = carouselRef.current;
+
+    scrollDataRef.current.isDragging = true;
+    carousel.classList.add("dragging");
+
+    scrollDataRef.current.startX = e.pageX;
   };
 
-  const removeRightControllerClass = (add: boolean) => {
-    if (rightControllerRef.current !== null && add) {
-      const controller: HTMLElement = rightControllerRef.current;
-      controller.classList.add("end");
-    } else if (rightControllerRef.current !== null && !add) {
-      const controller: HTMLElement = rightControllerRef.current;
-      controller.classList.remove("end");
-    }
+  const dragging = (e: React.MouseEvent) => {
+    if (!scrollDataRef.current.isDragging) return;
+    if (carouselRef.current === null) return;
+
+    const carousel: HTMLElement = carouselRef.current;
+    const startX = scrollDataRef.current.startX;
+    const PrevScrollPos = scrollDataRef.current.PrevScrollPos;
+
+    carousel.scrollLeft = PrevScrollPos - (e.pageX - startX);
+  };
+
+  const dragStop = () => {
+    if (carouselRef.current === null) return;
+
+    const carousel: HTMLElement = carouselRef.current;
+    const rawNextPos = carousel.scrollLeft;
+    const prevScrollPos = scrollDataRef.current.PrevScrollPos;
+
+    const carouselNextPos = roundToCard(
+      rawNextPos,
+      getCardWidth(),
+      prevScrollPos
+    );
+
+    checkCurrentMarker(carouselNextPos);
+    checkLeftControllerButton(carouselNextPos <= 0);
+    checkRightControllerButton(
+      carousel.scrollWidth - carouselNextPos - carousel.offsetWidth < 20
+    );
+
+    carousel.classList.remove("dragging");
+    carousel.scrollLeft = carouselNextPos;
+    scrollDataRef.current.PrevScrollPos = carouselNextPos;
+    scrollDataRef.current.isDragging = false;
+  };
+
+  const buttonHandler = (button: string) => {
+    if (carouselRef.current === null) return;
+    if (cardRef.current === null) return;
+
+    const carousel: HTMLElement = carouselRef.current;
+    const prevScrollPos = scrollDataRef.current.PrevScrollPos;
+    const rawNextPos =
+      button === "left"
+        ? carousel.scrollLeft - getCardWidth() * getVisibleCards()
+        : carousel.scrollLeft + getCardWidth() * getVisibleCards();
+
+    const carouselNextPos = roundToCard(
+      rawNextPos,
+      getCardWidth(),
+      prevScrollPos
+    );
+
+    checkLeftControllerButton(carouselNextPos <= 0);
+    checkCurrentMarker(carouselNextPos);
+    checkRightControllerButton(
+      carousel.scrollWidth - carouselNextPos - carousel.offsetWidth < 20
+    );
+
+    carousel.scrollLeft = carouselNextPos;
+    scrollDataRef.current.PrevScrollPos = carouselNextPos;
+  };
+
+  const checkLeftControllerButton = (add: boolean) => {
+    if (leftControllerRef.current === null) return;
+    const controller: HTMLElement = leftControllerRef.current;
+
+    add
+      ? controller.classList.add("start")
+      : controller.classList.remove("start");
+  };
+
+  const checkRightControllerButton = (add: boolean) => {
+    if (rightControllerRef.current === null) return;
+    const controller: HTMLElement = rightControllerRef.current;
+
+    add ? controller.classList.add("end") : controller.classList.remove("end");
+  };
+
+  const getVisibleCards = () => {
+    if (carouselRef.current === null) return 0;
+    const carousel: HTMLElement = carouselRef.current;
+    const carouselWidth = carousel.offsetWidth;
+
+    return Math.floor(carouselWidth / getCardWidth());
   };
 
   const getGapValue = () => {
@@ -45,61 +119,15 @@ const useCarousel = () => {
 
     return Number(getComputedStyle(carousel).gap.replace(/[a-zA-Z]/g, ""));
   };
-  const gapValue = getGapValue();
 
-  const getVisibleCards = () => {
+  const getCardWidth = () => {
     if (cardRef.current === null) return 0;
-    if (carouselRef.current === null) return 0;
-    const carousel: HTMLElement = carouselRef.current;
     const card: HTMLElement = cardRef.current;
-    const carouselWidth = carousel.offsetWidth;
-    const cardWidth = card.offsetWidth;
 
-    return Math.floor(carouselWidth / (cardWidth + gapValue));
+    return card.offsetWidth + scrollDataRef.current.gapValue;
   };
 
-  const scrollData = scrollDataRef.current;
-
-  const dragStart = (e: React.MouseEvent) => {
-    if (carouselRef.current === null) return;
-    const carousel: HTMLElement = carouselRef.current;
-
-    carousel.classList.add("dragging");
-
-    scrollData.isDragging = true;
-    scrollData.startX = e.pageX;
-    scrollData.startScrollLeftPos = carousel.scrollLeft;
-  };
-
-  const dragStop = () => {
-    if (carouselRef.current === null) return;
-    if (cardRef.current === null) return;
-
-    scrollData.isDragging = false;
-
-    const carousel: HTMLElement = carouselRef.current;
-    const card: HTMLElement = cardRef.current;
-    const cardWidth = card.offsetWidth;
-
-    carousel.classList.remove("dragging");
-
-    const scrollLeftPos = carousel.scrollLeft;
-    const prevPos = scrollData.startScrollLeftPos;
-
-    const carouselPos = roundToMultiple(
-      scrollLeftPos,
-      cardWidth + gapValue,
-      prevPos
-    );
-    removeLeftControllerClass(carouselPos);
-    if (carousel.scrollWidth - carouselPos - carousel.offsetWidth < 20) {
-      removeRightControllerClass(true);
-    } else removeRightControllerClass(false);
-
-    carousel.scrollLeft = carouselPos;
-  };
-
-  const roundToMultiple = (
+  const roundToCard = (
     scrollPos: number,
     widthToRound: number,
     prevPos: number
@@ -109,50 +137,29 @@ const useCarousel = () => {
       : Math.floor(scrollPos / widthToRound) * widthToRound;
   };
 
-  const dragging = (e: React.MouseEvent) => {
-    if (!scrollData.isDragging) return;
-    if (carouselRef.current === null) return;
-
-    const carousel: HTMLElement = carouselRef.current;
-    const startX = scrollData.startX;
-    const startScrollLeftPos = scrollData.startScrollLeftPos;
-
-    carousel.scrollLeft = startScrollLeftPos - (e.pageX - startX);
-  };
-
-  const buttonHandler = (button: string) => {
-    if (carouselRef.current === null) return;
+  const checkCurrentMarker = (carouselPos: number) => {
+    if (markerRef.current === null) return;
     if (cardRef.current === null) return;
 
-    const carousel: HTMLElement = carouselRef.current;
+    const markerContainer: HTMLElement = markerRef.current;
     const card: HTMLElement = cardRef.current;
-    const cardWidth = card.offsetWidth;
+    const marker = markerContainer.childNodes[
+      carouselPos / card.offsetWidth
+    ] as HTMLElement;
+    if (!marker) return;
+    const prevMarker = markerContainer.childNodes[
+      scrollDataRef.current.prevMarker
+    ] as HTMLElement;
 
-    carousel.scrollLeft +=
-      button === "left"
-        ? -(cardWidth + gapValue) * getVisibleCards()
-        : (cardWidth + gapValue) * getVisibleCards();
+    prevMarker.classList.remove("current");
+    marker.classList.add("current");
 
-    if (
-      button === "left" &&
-      carousel.scrollLeft - (cardWidth + gapValue) * getVisibleCards() <= 200
-    ) {
-      removeLeftControllerClass(0);
-    } else if (button !== "left" && carousel.scrollLeft >= 0) {
-      removeLeftControllerClass(201);
-    }
+    scrollDataRef.current.prevMarker = carouselPos / card.offsetWidth;
+  };
 
-    const nextScroll =
-      carousel.scrollLeft + (cardWidth + gapValue) * getVisibleCards();
-
-    if (
-      button !== "left" &&
-      carousel.scrollWidth - nextScroll - carousel.offsetWidth < 20
-    ) {
-      removeRightControllerClass(true);
-    } else {
-      removeRightControllerClass(false);
-    }
+  const onLoad = () => {
+    checkLeftControllerButton(scrollDataRef.current.PrevScrollPos <= 0);
+    scrollDataRef.current.gapValue = getGapValue();
   };
 
   return {
@@ -164,7 +171,8 @@ const useCarousel = () => {
     leftControllerRef,
     rightControllerRef,
     cardRef,
-    scrollData,
+    markerRef,
+    onLoad,
   };
 };
 

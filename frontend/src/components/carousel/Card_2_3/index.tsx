@@ -24,7 +24,10 @@ const Carousel2_3 = () => {
       >
         <Button src={arrow} />
       </CarouselController>
-      <CarouselContainer ref={carousel.carouselRef}>
+      <CarouselContainer
+        ref={carousel.carouselRef}
+        onLoad={() => carousel.onLoad()}
+      >
         <Cards cardRef={carousel.cardRef} />
       </CarouselContainer>
       <CarouselController

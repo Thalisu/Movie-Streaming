@@ -7,25 +7,30 @@ import {
 } from "./style";
 
 import arrow from "../../../assets/icons/arrow.svg";
+
 import BannerCarousel from "./Banner";
+import Markers from "./Markers";
 
 const Carousel16_9 = () => {
   const carousel = useCarousel();
 
   return (
     <VisibleArea
-      className="visiblea"
       onMouseDown={(event) => carousel.dragStart(event)}
       onMouseUp={() => carousel.dragStop()}
       onMouseMove={(event) => carousel.dragging(event)}
     >
+      <Markers markerRef={carousel.markerRef} />
       <CarouselController
         onClick={() => carousel.buttonHandler("left")}
         ref={carousel.leftControllerRef}
       >
         <Button src={arrow} />
       </CarouselController>
-      <CarouselContainer ref={carousel.carouselRef}>
+      <CarouselContainer
+        ref={carousel.carouselRef}
+        onLoad={() => carousel.onLoad()}
+      >
         <BannerCarousel BannerRef={carousel.cardRef} />
       </CarouselContainer>
       <CarouselController
