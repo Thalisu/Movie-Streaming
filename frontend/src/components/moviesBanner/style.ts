@@ -22,10 +22,12 @@ export const MovieTitle = styled.h2`
   font-size: 3rem;
   font-weight: 600;
   margin-bottom: 3px;
+  cursor: default;
 `;
 
 export const MovieInfo = styled.span`
   font-size: 0.875rem;
+  cursor: default;
 `;
 
 export const ButtonsContainer = styled.div`
@@ -39,6 +41,7 @@ export const WatchButton = styled.button`
   color: ${theme.colors.white100};
   border-radius: 15px;
   background-color: ${theme.colors.purple};
+  cursor: pointer;
 `;
 export const LikeButton = styled.button`
   display: flex;
@@ -48,4 +51,5 @@ export const LikeButton = styled.button`
   height: 48px;
   border-radius: 15px;
   background-image: ${theme.colors.whiteLinearGradient};
+  cursor: pointer;
 `;

@@ -9,7 +9,7 @@ import {
 import arrow from "../../../assets/icons/arrow.svg";
 
 import BannerCarousel from "./Banner";
-import Markers from "./Markers";
+import Markers from "../../markers/Markers";
 
 const Carousel16_9 = () => {
   const carousel = useCarousel();
@@ -20,7 +20,10 @@ const Carousel16_9 = () => {
       onMouseUp={() => carousel.dragStop()}
       onMouseMove={(event) => carousel.dragging(event)}
     >
-      <Markers markerRef={carousel.markerRef} />
+      <Markers
+        markerRef={carousel.markerRef}
+        handler={carousel.markerHandler}
+      />
       <CarouselController
         onClick={() => carousel.buttonHandler("left")}
         ref={carousel.leftControllerRef}

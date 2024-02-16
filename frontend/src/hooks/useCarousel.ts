@@ -50,15 +50,10 @@ const useCarousel = () => {
       prevScrollPos
     );
 
-    checkCurrentMarker(carouselNextPos);
-    checkLeftControllerButton(carouselNextPos <= 0);
-    checkRightControllerButton(
-      carousel.scrollWidth - carouselNextPos - carousel.offsetWidth < 20
-    );
+    checkCarousel(carouselNextPos, carousel.scrollWidth, carousel.offsetWidth);
 
     carousel.classList.remove("dragging");
-    carousel.scrollLeft = carouselNextPos;
-    scrollDataRef.current.PrevScrollPos = carouselNextPos;
+    moveScroller(carouselNextPos, carousel);
     scrollDataRef.current.isDragging = false;
   };
 
@@ -79,14 +74,36 @@ const useCarousel = () => {
       prevScrollPos
     );
 
-    checkLeftControllerButton(carouselNextPos <= 0);
-    checkCurrentMarker(carouselNextPos);
-    checkRightControllerButton(
-      carousel.scrollWidth - carouselNextPos - carousel.offsetWidth < 20
-    );
+    checkCarousel(carouselNextPos, carousel.scrollWidth, carousel.offsetWidth);
 
+    moveScroller(carouselNextPos, carousel);
+  };
+
+  const markerHandler = (marker: number) => {
+    if (carouselRef.current === null) return;
+    const carousel: HTMLElement = carouselRef.current;
+
+    const carouselNextPos = marker * getCardWidth();
+
+    checkCarousel(carouselNextPos, carousel.scrollWidth, carousel.offsetWidth);
+
+    moveScroller(carouselNextPos, carousel);
+  };
+
+  const onLoad = () => {
+    checkLeftControllerButton(scrollDataRef.current.PrevScrollPos <= 0);
+    scrollDataRef.current.gapValue = getGapValue();
+  };
+
+  const moveScroller = (carouselNextPos: number, carousel: HTMLElement) => {
     carousel.scrollLeft = carouselNextPos;
     scrollDataRef.current.PrevScrollPos = carouselNextPos;
+  };
+
+  const checkCarousel = (nextPos: number, sWidth: number, oWidth: number) => {
+    checkLeftControllerButton(nextPos <= 0);
+    checkRightControllerButton(sWidth - nextPos - oWidth < 20);
+    checkCurrentMarker(nextPos);
   };
 
   const checkLeftControllerButton = (add: boolean) => {
@@ -103,6 +120,25 @@ const useCarousel = () => {
     const controller: HTMLElement = rightControllerRef.current;
 
     add ? controller.classList.add("end") : controller.classList.remove("end");
+  };
+
+  const checkCurrentMarker = (carouselPos: number) => {
+    if (markerRef.current === null) return;
+    if (cardRef.current === null) return;
+
+    const markerContainer: HTMLElement = markerRef.current;
+    const marker = markerContainer.childNodes[
+      carouselPos / getCardWidth()
+    ] as HTMLElement;
+    if (!marker) return;
+    const prevMarker = markerContainer.childNodes[
+      scrollDataRef.current.prevMarker
+    ] as HTMLElement;
+
+    prevMarker.classList.remove("current");
+    marker.classList.add("current");
+
+    scrollDataRef.current.prevMarker = carouselPos / getCardWidth();
   };
 
   const getVisibleCards = () => {
@@ -137,41 +173,17 @@ const useCarousel = () => {
       : Math.floor(scrollPos / widthToRound) * widthToRound;
   };
 
-  const checkCurrentMarker = (carouselPos: number) => {
-    if (markerRef.current === null) return;
-    if (cardRef.current === null) return;
-
-    const markerContainer: HTMLElement = markerRef.current;
-    const card: HTMLElement = cardRef.current;
-    const marker = markerContainer.childNodes[
-      carouselPos / card.offsetWidth
-    ] as HTMLElement;
-    if (!marker) return;
-    const prevMarker = markerContainer.childNodes[
-      scrollDataRef.current.prevMarker
-    ] as HTMLElement;
-
-    prevMarker.classList.remove("current");
-    marker.classList.add("current");
-
-    scrollDataRef.current.prevMarker = carouselPos / card.offsetWidth;
-  };
-
-  const onLoad = () => {
-    checkLeftControllerButton(scrollDataRef.current.PrevScrollPos <= 0);
-    scrollDataRef.current.gapValue = getGapValue();
-  };
-
   return {
-    dragStart,
-    dragStop,
-    dragging,
-    buttonHandler,
     carouselRef,
     leftControllerRef,
     rightControllerRef,
     cardRef,
     markerRef,
+    dragStart,
+    dragStop,
+    dragging,
+    buttonHandler,
+    markerHandler,
     onLoad,
   };
 };
