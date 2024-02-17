@@ -1,6 +1,6 @@
-import { Movie, Time, Type } from "./types";
+import {  Time, Type } from "./types";
 import { error } from "../utils/logger";
-import genresData from "../data/genres";
+
 
 const isString = (text: unknown): text is string => {
   if (!text) return false;
@@ -45,63 +45,4 @@ export const parseNumber = (num: unknown): number => {
     throw new Error(`Incorrect or missing quantity: ${num}`);
   }
   return Number(num);
-};
-
-class FilteredMovie {
-  title: string;
-  backdrop_path: string;
-  poster_path: string;
-  overview: string;
-  genres: string[];
-  release_date: string;
-  vote_average: number;
-  popularity: number;
-  id: number;
-
-  constructor(
-    title: string,
-    backdrop_path: string,
-    poster_path: string,
-    overview: string,
-    genres: string[],
-    release_date: string,
-    vote_average: number,
-    popularity: number,
-    id: number
-  ) {
-    this.title = title;
-    this.backdrop_path = backdrop_path;
-    this.poster_path = poster_path;
-    this.overview = overview;
-    this.genres = genres;
-    this.release_date = release_date;
-    this.vote_average = vote_average;
-    this.popularity = popularity;
-    this.id = id;
-  }
-}
-
-export const parseMovies = (movies: Movie[]): FilteredMovie[] => {
-  const result = movies.map((movie) => {
-    const backdrop_path = `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`;
-    const poster_path = `https://image.tmdb.org/t/p/original/${movie.poster_path}`;
-
-    const genres = movie.genre_ids.map((id) => {
-      const foundData = genresData.find((data) => data.id === id)?.name;
-      return foundData as string;
-    });
-
-    return new FilteredMovie(
-      movie.title,
-      backdrop_path,
-      poster_path,
-      movie.overview,
-      genres,
-      movie.release_date,
-      movie.vote_average,
-      movie.popularity,
-      movie.id
-    );
-  });
-  return result;
 };

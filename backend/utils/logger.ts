@@ -5,3 +5,5 @@ export const info = (...params: unknown[]) => {
 export const error = (...params: unknown[]) => {
   console.error(...params);
 };
+
+export default { info, error };

@@ -15,9 +15,9 @@ moviesRouter.get("/trending/:time/:quantity/:after?", async (req, res) => {
 
   /*   if (isNumber(req.params.after)) info("todo"); */
 
-  const filteredData = await getMovies(quantity, url);
+  const movies = await getMovies(quantity, url);
 
-  res.json(filteredData);
+  res.json(movies);
 });
 
 // eslint-disable-next-line @typescript-eslint/no-misused-promises
@@ -28,10 +28,9 @@ moviesRouter.get("/:type/:quantity/:after?", async (req, res) => {
   const url = `${config.BASE_URL}movie/${type}?api_key=${config.API_KEY}`;
 
   /*   if (isNumber(req.params.after)) info("todo"); */
+  const movies = await getMovies(quantity, url, type);
 
-  const filteredData = await getMovies(quantity, url);
-
-  res.json(filteredData);
+  res.json(movies);
 });
 
 export default moviesRouter;

@@ -76,21 +76,22 @@ export const Card = styled.div<{
   justify-content: end;
   width: 300px;
   aspect-ratio: 16 / 9;
-  border: 3px solid rgba(0, 0, 0, 0);
+
   ${({ $first }) => $first && "margin: 0 0 0 4rem"};
   transition: border 0.2s;
   cursor: pointer;
-  &:hover {
-    border: 3px solid ${theme.colors.purple};
-  }
 `;
 
 export const CardImg = styled.img`
   width: 100%;
   opacity: 0;
   transition: opacity 0.3s;
+  border: 3px solid rgba(0, 0, 0, 0);
   &.loaded {
     opacity: 1;
+  }
+  &:hover {
+    border: 3px solid ${theme.colors.purple};
   }
 `;
 
