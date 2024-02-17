@@ -1,18 +1,11 @@
-import Header from "./pages/home/header";
-import Main from "./pages/home/main";
-import Navbar from "./components/navbar";
-import Aside from "./components/Aside";
-import Footer from "./pages/home/footer";
+import { BrowserRouter } from "react-router-dom";
+import Router from "./pages/router";
 
 const App = () => {
   return (
-    <>
-      <Aside />
-      <Navbar />
-      <Header />
-      <Main />
-      <Footer />
-    </>
+    <BrowserRouter>
+      <Router />
+    </BrowserRouter>
   );
 };
 

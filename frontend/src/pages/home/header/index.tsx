@@ -2,6 +2,7 @@
 
 /* import background from "../../../assets/img/exampleBackground.png"; */
 import Carousel from "../../../components/carousel/headerBanner";
+import Navbar from "../../../components/navbar";
 import { HeaderContainer } from "./style";
 
 /* const movie = {
@@ -13,9 +14,12 @@ import { HeaderContainer } from "./style";
 
 const Header = (): JSX.Element => {
   return (
-    <HeaderContainer>
-      <Carousel />
-    </HeaderContainer>
+    <>
+      <Navbar />
+      <HeaderContainer>
+        <Carousel />
+      </HeaderContainer>
+    </>
   );
 };
 

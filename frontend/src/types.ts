@@ -16,3 +16,9 @@ export enum Type {
   Upcoming = "upcoming",
   Latest = "latest",
 }
+
+export interface routerType {
+  title: string;
+  path: string;
+  element: JSX.Element;
+}
