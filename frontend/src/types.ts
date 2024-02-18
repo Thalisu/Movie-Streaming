@@ -22,3 +22,9 @@ export interface routerType {
   path: string;
   element: JSX.Element;
 }
+
+declare global {
+  interface Window {
+    onYouTubeIframeAPIReady?: () => void;
+  }
+}
