@@ -1,8 +1,8 @@
-import { routerType } from "../types";
+import { RouterType } from "../types";
 import Home from "./Home";
 import Player from "./Player";
 
-const pagesData: routerType[] = [
+const pagesData: RouterType[] = [
   {
     path: "",
     element: <Home />,
