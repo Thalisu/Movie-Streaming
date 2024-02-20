@@ -41,6 +41,11 @@ export const VideoControlsContainer = styled.div`
   padding: 2rem;
   gap: 2rem;
   z-index: 100;
+  opacity: 0;
+  transition: opacity 0.3s;
+  &.moved {
+    opacity: 1;
+  }
   &::before {
     content: "";
     position: absolute;

@@ -33,6 +33,7 @@ const useIframeApi = () => {
     videoDuration: number;
     isDragging: boolean;
     wasPaused: boolean;
+    timeout: NodeJS.Timeout | null;
   }> = useRef({
     container: null,
     iframe: null,
@@ -40,6 +41,7 @@ const useIframeApi = () => {
     videoDuration: 0,
     isDragging: false,
     wasPaused: true,
+    timeout: null,
   });
 
   document.addEventListener("mouseup", (e) => {
@@ -57,7 +59,7 @@ const useIframeApi = () => {
       new YT.Player("player", {
         height: "100%",
         width: "100%",
-        videoId: "8atVIkoVsGk",
+        videoId: "PfZnWGp068I",
         playerVars: {
           playsinline: 1,
           controls: 0,
@@ -241,17 +243,12 @@ const useIframeApi = () => {
   const toggleDragging = (event: React.MouseEvent | MouseEvent) => {
     if (player === null) return;
     if (timelineRef.current === null) return;
-    if (videoContainerRef.current === null) return;
 
     const rect = timelineRef.current.getBoundingClientRect();
     const percent =
       Math.min(Math.max(0, event.pageX - rect.x), rect.width) / rect.width;
 
     utils.current.isDragging = (event.buttons & 1) === 1;
-    videoContainerRef.current.classList.toggle(
-      "dragging",
-      utils.current.isDragging
-    );
 
     if (utils.current.isDragging) {
       if (playerState === 1) {
@@ -267,6 +264,20 @@ const useIframeApi = () => {
     }
   };
 
+  const showMenu = () => {
+    if (videoContainerRef.current === null) return;
+    if (utils.current.timeout !== null) {
+      clearTimeout(utils.current.timeout);
+    }
+    videoContainerRef.current.classList.add("moved");
+
+    const removeMenu = () => {
+      if (videoContainerRef.current === null) return;
+      videoContainerRef.current.classList.remove("moved");
+    };
+    utils.current.timeout = setTimeout(() => removeMenu(), 3000);
+  };
+
   return {
     startPauseVideo,
     getStartPauseIcon,
@@ -278,6 +289,7 @@ const useIframeApi = () => {
     skip,
     handleTimelineUpdate,
     toggleDragging,
+    showMenu,
     videoContainerRef,
     currentTimeRef,
     totalTimeRef,
