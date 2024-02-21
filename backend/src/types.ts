@@ -17,6 +17,11 @@ export interface MovieResponse {
   total_results: number;
 }
 
+export interface MovieVideosResponse {
+  id: number;
+  results: MovieVideosData[];
+}
+
 export interface MovieData {
   adult: boolean;
   backdrop_path: string;
@@ -33,6 +38,19 @@ export interface MovieData {
   video: boolean;
   vote_average: number;
   vote_count: number;
+}
+
+export interface MovieVideosData {
+  iso_639_1: string;
+  iso_3166_1: string;
+  name: string;
+  key: string;
+  site: string;
+  size: number;
+  type: string;
+  official: boolean;
+  published_at: string;
+  id: string;
 }
 
 type FilterMovie = Omit<
@@ -55,6 +73,7 @@ export class Movie implements FilterMovie {
   release_date: string;
   vote_average: number;
   popularity: number;
+  video: string | undefined;
   id: number;
 
   constructor(movie: Movie) {
@@ -66,6 +85,7 @@ export class Movie implements FilterMovie {
     this.release_date = movie.release_date;
     this.vote_average = movie.vote_average;
     this.popularity = movie.popularity;
+    this.video = movie.video;
     this.id = movie.id;
   }
 }

@@ -16,17 +16,9 @@ const Cards = ({ cardRef }: { cardRef: React.MutableRefObject<null> }) => {
   return (
     <>
       {movies.map((movie, i) => {
-        return i === 0 ? (
-          <Card key={movie.id} ref={cardRef} $first={true} draggable="false">
-            <CardImg
-              src={movie.poster_path}
-              draggable="false"
-              loading="lazy"
-              onLoad={(event) => loadedImgFadeIn(event)}
-            />
-          </Card>
-        ) : (
-          <Card key={movie.id} draggable="false">
+        const itemProps = i === 0 ? { $first: true, ref: cardRef } : {};
+        return (
+          <Card key={movie.id + i} {...itemProps} draggable="false">
             <CardImg
               src={movie.poster_path}
               draggable="false"

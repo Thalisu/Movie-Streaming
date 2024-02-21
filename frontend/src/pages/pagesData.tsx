@@ -1,6 +1,5 @@
 import { RouterType } from "../types";
 import Home from "./Home";
-import Player from "./Player";
 
 const pagesData: RouterType[] = [
   {
@@ -9,8 +8,8 @@ const pagesData: RouterType[] = [
     title: "home",
   },
   {
-    path: "player",
-    element: <Player />,
+    path: "player/:id",
+    element: <Home />,
     title: "player",
   },
 ];

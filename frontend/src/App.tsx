@@ -1,11 +1,15 @@
 import { BrowserRouter } from "react-router-dom";
 import Router from "./pages/router";
+import Player from "./pages/Player";
 
 const App = () => {
   return (
-    <BrowserRouter>
-      <Router />
-    </BrowserRouter>
+    <>
+      <BrowserRouter>
+        <Player />
+        <Router />
+      </BrowserRouter>
+    </>
   );
 };
 

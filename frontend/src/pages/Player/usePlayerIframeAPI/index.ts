@@ -1,16 +1,17 @@
 import { useRef, useState } from "react";
 import { YouTubePlayer } from "youtube-player/dist/types";
-import { YoutubeEvent } from "../types";
+import { YoutubeEvent } from "../../../types";
 
-import play from "../assets/icons/play.svg";
-import pause from "../assets/icons/pause.svg";
-import openFullscreen from "../assets/icons/notFullscreenMode.svg";
-import closeFullscreen from "../assets/icons/onFullscreenMode.svg";
-import volumeMuted from "../assets/icons/volumeMuted.svg";
-import volumeLow from "../assets/icons/volumeLow.svg";
-import volumeHigh from "../assets/icons/volumeHigh.svg";
+import play from "../../../assets/icons/play.svg";
+import pause from "../../../assets/icons/pause.svg";
+import openFullscreen from "../../../assets/icons/notFullscreenMode.svg";
+import closeFullscreen from "../../../assets/icons/onFullscreenMode.svg";
+import volumeMuted from "../../../assets/icons/volumeMuted.svg";
+import volumeLow from "../../../assets/icons/volumeLow.svg";
+import volumeHigh from "../../../assets/icons/volumeHigh.svg";
+import { useParams } from "react-router-dom";
 
-const useIframeApi = () => {
+const useIframeApi = (id) => {
   const [player, setPlayer] = useState<YouTubePlayer | null>(null);
   const [playerState, setPlayerState] = useState<number | null>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -59,7 +60,7 @@ const useIframeApi = () => {
       new YT.Player("player", {
         height: "100%",
         width: "100%",
-        videoId: "PfZnWGp068I",
+        videoId: id,
         playerVars: {
           playsinline: 1,
           controls: 0,
@@ -77,11 +78,14 @@ const useIframeApi = () => {
     );
   };
 
-  const tag = document.createElement("script");
-  tag.src = "https://www.youtube.com/iframe_api";
-  const firstScriptTag = document.getElementsByTagName("script")[0];
-  if (firstScriptTag.parentNode !== null)
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+  if (document.getElementById("iframeAPI") === null) {
+    const tag = document.createElement("script");
+    tag.src = "https://www.youtube.com/iframe_api";
+    tag.id = "iframeAPI";
+    const firstScriptTag = document.getElementsByTagName("script")[0];
+    if (firstScriptTag.parentNode !== null)
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+  }
 
   const startPauseVideo = async () => {
     if (player === null) return;
@@ -187,6 +191,8 @@ const useIframeApi = () => {
     const currentTime = formatTime(rawTime);
     if (currentTimeRef.current !== null)
       currentTimeRef.current.textContent = currentTime;
+
+    event.target.setVolume(50);
   };
 
   const formatTime = (seconds: number) => {

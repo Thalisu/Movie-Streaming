@@ -1,6 +1,7 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import { RouterType } from "../types";
 import pagesData from "./pagesData";
+import { useEffect } from "react";
 
 const Router = () => {
   const pageRoutes = pagesData.map(({ path, title, element }: RouterType) => {

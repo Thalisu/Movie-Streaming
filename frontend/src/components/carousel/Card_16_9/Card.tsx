@@ -16,11 +16,12 @@ const Cards = ({ cardRef }: { cardRef: React.MutableRefObject<null> }) => {
   return (
     <>
       {movies.map((movie, i) => {
+        const itemProps = i === 0 ? { $first: true, ref: cardRef } : {};
         return (
           <Card
+            to={`/player/${movie.video}`}
             key={movie.id}
-            ref={cardRef}
-            $first={i === 0 ? true : false}
+            {...itemProps}
             draggable="false"
           >
             <CardImg
