@@ -42,18 +42,13 @@ declare global {
   }
 }
 
-export interface YoutubeApiCommands {
-  startPauseVideo: () => Promise<void>;
-  getStartPauseIcon: () => string;
-  toggleFullscreen: () => Promise<void>;
-  getFullscreenIcon: () => string;
-  toggleMute: () => void;
-  setVolume: (event: React.FormEvent<HTMLInputElement>) => void;
-  getVolumeIcon: () => string;
-  skip: (seconds: number) => void;
-  handleTimelineUpdate: (event: React.MouseEvent) => void;
-  toggleDragging: (event: React.MouseEvent) => void;
+export interface ControlsProps {
+  player: YouTubePlayer | null;
+  playerState: number | null;
   currentTimeRef: React.MutableRefObject<HTMLParagraphElement | null>;
   totalTimeRef: React.MutableRefObject<HTMLParagraphElement | null>;
   timelineRef: React.MutableRefObject<HTMLDivElement | null>;
+  containerRef: React.MutableRefObject<HTMLDivElement | null>;
 }
+
+export type API = Omit<ControlsProps, "containerRef">;

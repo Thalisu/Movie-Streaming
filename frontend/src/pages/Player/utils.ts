@@ -15,7 +15,6 @@ export const updateVideoCurrentDuration = (
   timelineRef: HTMLDivElement
 ) => {
   return setInterval(async () => {
-    console.log("intervalRunning");
     const rawTime = await player.getCurrentTime();
     currentTimeRef.id = rawTime.toString();
 

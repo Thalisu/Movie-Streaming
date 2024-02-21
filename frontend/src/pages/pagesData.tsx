@@ -1,6 +1,7 @@
 import { RouterType } from "../types";
 import Home from "./Home";
-import PlayerPlaceHolder from "./Player/Container";
+import NotFound from "./PlaceHolders/NotFound";
+import PlayerPlaceHolder from "./PlaceHolders/PlayerPlaceholder";
 
 const pagesData: RouterType[] = [
   {
@@ -12,6 +13,11 @@ const pagesData: RouterType[] = [
     path: "player/:id",
     element: <PlayerPlaceHolder />,
     title: "player",
+  },
+  {
+    path: "*",
+    element: <NotFound />,
+    title: "NoRoutesFound",
   },
 ];
 
