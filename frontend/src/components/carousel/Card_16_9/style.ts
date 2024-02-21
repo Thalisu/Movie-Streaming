@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import theme from "../../../styles/theme";
+import { Link } from "react-router-dom";
 
 export const Button = styled.img<{ $right?: boolean }>`
   opacity: 1;
@@ -66,7 +67,7 @@ export const CarouselContainer = styled.ul<{
   }
 `;
 
-export const Card = styled.div<{
+export const Card = styled(Link)<{
   $first?: boolean;
   ref?: unknown;
 }>`

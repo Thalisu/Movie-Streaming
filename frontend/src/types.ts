@@ -9,6 +9,7 @@ export interface Movie {
   release_date: string;
   vote_average: number;
   popularity: number;
+  video: string;
   id: number;
 }
 
@@ -30,9 +31,14 @@ export interface YoutubeEvent {
   data: number;
 }
 
+interface Player {
+  Player: new (arg0: string, arg1: object) => YouTubePlayer;
+}
+
 declare global {
   interface Window {
-    onYouTubeIframeAPIReady?: () => void;
+    onYouTubeIframeAPIReady: () => void;
+    YT: Player;
   }
 }
 
