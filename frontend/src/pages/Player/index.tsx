@@ -13,25 +13,26 @@ import Timeline from "./timeline";
 
 import exitIcon from "../../assets/icons/exitPlayer.svg";
 import { Link, useLocation } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const Player = () => {
   const location = useLocation();
+  const [isOnPlayer, setIsOnPlayer] = useState(false);
   useEffect(() => {
     if (location.pathname.includes("player")) {
-      const PlayerContainer = document.getElementById("player-container");
-      PlayerContainer?.style.setProperty("--isInPlayer", "block");
+      setIsOnPlayer(true);
     } else {
-      const PlayerContainer = document.getElementById("player-container");
-      PlayerContainer?.style.setProperty("--isInPlayer", "none");
+      setIsOnPlayer(false);
     }
   }, [location]);
-  const id = location.pathname.substring(8);
-  console.log(id);
-  const api = useIframeApi(id);
+  const api = useIframeApi();
 
   return (
-    <Container id="player-container" onMouseMove={() => api.showMenu()}>
+    <Container
+      id="player-container"
+      $isOnPlayer={isOnPlayer}
+      onMouseMove={() => api.showMenu()}
+    >
       <TopBarContainer>
         <Link to={`/`}>
           <ExitButton src={exitIcon}></ExitButton>

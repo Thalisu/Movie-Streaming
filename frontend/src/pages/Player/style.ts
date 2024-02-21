@@ -1,13 +1,13 @@
 import styled from "styled-components";
 import theme from "../../styles/theme";
 
-export const Container = styled.div`
+export const Container = styled.div<{ $isOnPlayer: boolean }>`
   position: fixed;
   width: 100svw;
   height: 100svh;
   background-color: ${theme.colors.background};
   overflow: hidden;
-  display: var(--isInPlayer);
+  display: ${({ $isOnPlayer }) => ($isOnPlayer ? "block" : "none")};
   z-index: 1000;
 `;
 

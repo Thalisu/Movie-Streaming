@@ -3,7 +3,10 @@ import { MovieResponse, MovieData, Movie, Type } from "../types";
 import genresData from "../../data/genres";
 import getMovieVideo from "./videoService";
 
-const treatData = async (movies: MovieData[]): Promise<Movie[]> => {
+const treatData = async (
+  movies: MovieData[],
+  isUpcoming: boolean
+): Promise<Movie[]> => {
   const moviesData = await Promise.all(
     movies.map(async (movie) => {
       const title = movie.title;
@@ -22,8 +25,8 @@ const treatData = async (movies: MovieData[]): Promise<Movie[]> => {
       const vote_average = movie.vote_average;
       const popularity = movie.popularity;
       const id = movie.id;
-      const video = await getMovieVideo(id);
-      console.log(video);
+      let video;
+      if (isUpcoming) video = await getMovieVideo(id);
 
       return new Movie({
         title,
@@ -63,5 +66,5 @@ export const getMovies = async (quantity: number, url: string, type?: Type) => {
     }
   }
 
-  return treatData(movieData.slice(0, quantity));
+  return treatData(movieData.slice(0, quantity), type === Type.Upcoming);
 };

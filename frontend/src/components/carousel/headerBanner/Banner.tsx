@@ -1,24 +1,28 @@
 import movieService from "../../../services/movieService";
-import { useEffect, useState } from "react";
-import { Movie } from "../../../types";
 import { Banner, BannerImg } from "./style";
 import TrendingMovie from "../../moviesBanner";
+import { useQuery } from "@tanstack/react-query";
 const BannerCarousel = ({
   BannerRef,
 }: {
   BannerRef: React.MutableRefObject<null>;
 }) => {
-  const [movies, setMovies] = useState<Movie[]>([]);
+  const { data: movies, isLoading } = useQuery({
+    queryFn: () => movieService.getMovies(6, "popular"),
+    queryKey: ["popular"],
+  });
 
-  useEffect(() => {
-    movieService.getMovies(6, "popular").then((data) => setMovies(data));
-  }, []);
   const loadedImgFadeIn = (event: React.SyntheticEvent) => {
     event.currentTarget.classList.add("loaded");
   };
+
+  if (isLoading) {
+    return;
+  }
+
   return (
     <>
-      {movies.map((movie) => {
+      {movies?.map((movie) => {
         return (
           <Banner key={movie.id} draggable="false" ref={BannerRef}>
             <BannerImg

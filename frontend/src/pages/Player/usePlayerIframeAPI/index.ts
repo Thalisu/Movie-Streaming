@@ -1,6 +1,4 @@
-import { useRef, useState } from "react";
-import { YouTubePlayer } from "youtube-player/dist/types";
-import { YoutubeEvent } from "../../../types";
+import { useEffect, useRef, useState } from "react";
 
 import play from "../../../assets/icons/play.svg";
 import pause from "../../../assets/icons/pause.svg";
@@ -9,14 +7,16 @@ import closeFullscreen from "../../../assets/icons/onFullscreenMode.svg";
 import volumeMuted from "../../../assets/icons/volumeMuted.svg";
 import volumeLow from "../../../assets/icons/volumeLow.svg";
 import volumeHigh from "../../../assets/icons/volumeHigh.svg";
-import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import useIframeAPI from "./useIframeAPI";
+import { formatTime } from "./utils";
 
-const useIframeApi = (id) => {
-  const [player, setPlayer] = useState<YouTubePlayer | null>(null);
-  const [playerState, setPlayerState] = useState<number | null>(null);
+const usePlayer = () => {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [isLowVolume, setIsLowVolume] = useState(false);
+  const location = useLocation();
+  const id = location.pathname.substring(8);
 
   const videoContainerRef: React.MutableRefObject<HTMLDivElement | null> =
     useRef(null);
@@ -45,6 +45,13 @@ const useIframeApi = (id) => {
     timeout: null,
   });
 
+  const { player, playerState } = useIframeAPI(
+    currentTimeRef.current,
+    totalTimeRef.current,
+    timelineRef.current,
+    id
+  );
+
   document.addEventListener("mouseup", (e) => {
     if (utils.current.isDragging) toggleDragging(e);
   });
@@ -52,40 +59,10 @@ const useIframeApi = (id) => {
     if (utils.current.isDragging) handleTimelineUpdate(e);
   });
 
-  let updateCurrentTime: NodeJS.Timeout;
-
-  window.onYouTubeIframeAPIReady = function () {
-    console.log("api loaded");
-    setPlayer(
-      new YT.Player("player", {
-        height: "100%",
-        width: "100%",
-        videoId: id,
-        playerVars: {
-          playsinline: 1,
-          controls: 0,
-          rel: 0,
-          autoplay: 1,
-          mute: 1,
-        },
-        events: {
-          onReady: onReady,
-          onStateChange: onStateChange,
-          onAutoplayBlocked: onStateChange,
-          onError: handleError,
-        },
-      })
-    );
-  };
-
-  if (document.getElementById("iframeAPI") === null) {
-    const tag = document.createElement("script");
-    tag.src = "https://www.youtube.com/iframe_api";
-    tag.id = "iframeAPI";
-    const firstScriptTag = document.getElementsByTagName("script")[0];
-    if (firstScriptTag.parentNode !== null)
-      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-  }
+  useEffect(() => {
+    if (id !== undefined && player !== null && "cueVideoById" in player)
+      player.cueVideoById(id);
+  }, [id, player]);
 
   const startPauseVideo = async () => {
     if (player === null) return;
@@ -139,80 +116,17 @@ const useIframeApi = (id) => {
     return isLowVolume ? volumeLow : volumeHigh;
   };
 
-  const handleError = (event: YoutubeEvent) => console.log(event);
-
-  const onStateChange = async (event: YoutubeEvent) => {
-    if (event === undefined) return;
-    if (event.data === 1) {
-      await event.target.unMute();
-      updateCurrentTime = setInterval(() => getTime(event), 100);
-      setIsMuted(false);
-    }
-    if (event.data !== 1) {
-      clearInterval(updateCurrentTime);
-    }
-    setPlayerState(event.data);
-  };
-
-  const getTime = async (event: YoutubeEvent) => {
-    if (currentTimeRef.current === null) return;
-    if (timelineRef.current === null) return;
-    console.log("t");
-
-    let rawTime = await event.target.getCurrentTime();
-    utils.current.currentDuration > rawTime
-      ? (rawTime = utils.current.currentDuration)
-      : (utils.current.currentDuration = rawTime);
-
-    const percent = utils.current.currentDuration / utils.current.videoDuration;
-    timelineRef.current.style.setProperty(
-      "--progress-position",
-      percent.toString()
-    );
-
-    const currentTime = formatTime(rawTime);
-    currentTimeRef.current.textContent = currentTime;
-  };
-
-  const onReady = async (event: YoutubeEvent) => {
-    const container = document.getElementById("player-container");
-    if (container !== null) utils.current.container = container;
-
-    const iframe = await event.target.getIframe();
-    if (iframe !== null) utils.current.iframe = iframe;
-
-    const rawTotalTime = await event.target.getDuration();
-    utils.current.videoDuration = rawTotalTime;
-    const totalTime: string = formatTime(rawTotalTime);
-    if (totalTimeRef.current !== null)
-      totalTimeRef.current.textContent = totalTime;
-
-    const rawTime = await event.target.getCurrentTime();
-    const currentTime = formatTime(rawTime);
-    if (currentTimeRef.current !== null)
-      currentTimeRef.current.textContent = currentTime;
-
-    event.target.setVolume(50);
-  };
-
-  const formatTime = (seconds: number) => {
-    return seconds < 60
-      ? new Date(seconds * 1000).toISOString().substring(15, 19)
-      : seconds < 3600
-      ? new Date(seconds * 1000).toISOString().substring(14, 19)
-      : new Date(seconds * 1000).toISOString().substring(11, 19);
-  };
-
   const skip = (seconds: number) => {
     if (player === null) return;
     if (currentTimeRef.current === null) return;
     if (timelineRef.current === null) return;
 
-    const skipTo = utils.current.currentDuration + seconds;
-    utils.current.currentDuration = skipTo;
+    const skipTo = Number(currentTimeRef.current.id) + seconds;
+    currentTimeRef.current.id = skipTo.toString();
     player.seekTo(skipTo, true);
 
-    const percent = utils.current.currentDuration / utils.current.videoDuration;
+    const percent =
+      Number(currentTimeRef.current.id) / Number(totalTimeRef.current?.id);
     timelineRef.current.style.setProperty(
       "--progress-position",
       percent.toString()
@@ -241,7 +155,9 @@ const useIframeApi = (id) => {
         percent.toString()
       );
 
-      const currentTime = formatTime(percent * utils.current.videoDuration);
+      const currentTime = formatTime(
+        percent * Number(totalTimeRef.current?.id)
+      );
       currentTimeRef.current.textContent = currentTime;
     }
   };
@@ -249,6 +165,7 @@ const useIframeApi = (id) => {
   const toggleDragging = (event: React.MouseEvent | MouseEvent) => {
     if (player === null) return;
     if (timelineRef.current === null) return;
+    if (currentTimeRef.current === null) return;
 
     const rect = timelineRef.current.getBoundingClientRect();
     const percent =
@@ -262,9 +179,11 @@ const useIframeApi = (id) => {
         utils.current.wasPaused = false;
       }
     } else {
-      utils.current.currentDuration = percent * utils.current.videoDuration;
+      currentTimeRef.current.id = (
+        percent * Number(totalTimeRef.current?.id)
+      ).toString();
 
-      player.seekTo(utils.current.currentDuration, true);
+      player.seekTo(Number(currentTimeRef.current.id), true);
       if (utils.current.wasPaused === false) player.playVideo();
       utils.current.wasPaused = true;
     }
@@ -303,4 +222,4 @@ const useIframeApi = (id) => {
   };
 };
 
-export default useIframeApi;
+export default usePlayer;

@@ -1,21 +1,23 @@
 import movieService from "../../../services/movieService";
-import { useEffect, useState } from "react";
-import { Movie } from "../../../types";
 import { Card, FinalCard, CardImg, Title } from "./style";
+import { useQuery } from "@tanstack/react-query";
 const Cards = ({ cardRef }: { cardRef: React.MutableRefObject<null> }) => {
-  const [movies, setMovies] = useState<Movie[]>([]);
-
-  useEffect(() => {
-    movieService.getMovies(10, "upcoming").then((data) => setMovies(data));
-  }, []);
+  const { data: movies, isLoading } = useQuery({
+    queryFn: () => movieService.getMovies(10, "upcoming"),
+    queryKey: ["upcoming"],
+  });
 
   const loadedImgFadeIn = (event: React.SyntheticEvent) => {
     event.currentTarget.classList.add("loaded");
   };
 
+  if (isLoading) {
+    return;
+  }
+
   return (
     <>
-      {movies.map((movie, i) => {
+      {movies?.map((movie, i) => {
         const itemProps = i === 0 ? { $first: true, ref: cardRef } : {};
         return (
           <Card

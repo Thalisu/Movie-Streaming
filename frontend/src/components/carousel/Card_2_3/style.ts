@@ -89,7 +89,7 @@ export const Card = styled.li<{
 export const CardImg = styled.img`
   border-radius: 25px;
   width: 100%;
-  opacity: 0;
+  opacity: 1;
   transition: opacity 0.3s;
   &.loaded {
     opacity: 1;
