@@ -29,7 +29,7 @@ const useIframeAPI = () => {
 
   window.onYouTubeIframeAPIReady = function () {
     setPlayer(
-      new YT.Player("player", {
+      new window.YT.Player("player", {
         height: "100%",
         width: "100%",
         playerVars: {
