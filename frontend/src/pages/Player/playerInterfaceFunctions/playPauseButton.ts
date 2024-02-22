@@ -1,5 +1,5 @@
-import play from "../../../assets/icons/play.svg";
-import pause from "../../../assets/icons/pause.svg";
+import play from "/assets/play.svg?url";
+import pause from "/assets/pause.svg?url";
 import { YouTubePlayer } from "youtube-player/dist/types";
 
 const playPauseButton = (

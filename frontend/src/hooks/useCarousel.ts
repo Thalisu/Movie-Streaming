@@ -16,12 +16,7 @@ const useCarousel = () => {
   });
 
   const dragStart = (e: React.MouseEvent) => {
-    if (carouselRef.current === null) return null;
-
-    const carousel: HTMLElement = carouselRef.current;
-
     scrollDataRef.current.isDragging = true;
-    carousel.classList.add("dragging");
 
     scrollDataRef.current.startX = e.pageX;
   };
@@ -33,6 +28,9 @@ const useCarousel = () => {
     const carousel: HTMLElement = carouselRef.current;
     const startX = scrollDataRef.current.startX;
     const PrevScrollPos = scrollDataRef.current.PrevScrollPos;
+
+    if (e.pageX - startX > 10 || e.pageX - startX < -10)
+      carousel.classList.add("dragging");
 
     carousel.scrollLeft = PrevScrollPos - (e.pageX - startX);
   };

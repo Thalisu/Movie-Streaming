@@ -1,4 +1,4 @@
-import tmdbLogo from "../../../assets/img/tmdbLogo.svg";
+import tmdbLogo from "/assets/tmdbLogo.svg?url";
 import { Container, Span, TmdbLogo } from "./style";
 
 const Footer = () => (

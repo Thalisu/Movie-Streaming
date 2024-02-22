@@ -11,15 +11,14 @@ import {
   Icon,
 } from "./style";
 import Xbutton from "./Xbutton";
-
-import filmIcon from "../../assets/icons/film.svg";
-import heartIcon from "../../assets/icons/heart.svg";
-import trendingIcon from "../../assets/icons/trending.svg";
-import calendarIcon from "../../assets/icons/calendar.svg";
-import communityIcon from "../../assets/icons/users.svg";
-import socialIcon from "../../assets/icons/message.svg";
-import optionsIcon from "../../assets/icons/options.svg";
-import logoutIcon from "../../assets/icons/log-out.svg";
+import filmIcon from "/assets/film.svg?url";
+import heartIcon from "/assets/heart.svg?url";
+import trendingIcon from "/assets/trending.svg?url";
+import calendarIcon from "/assets/calendar.svg?url";
+import communityIcon from "/assets/users.svg?url";
+import socialIcon from "/assets/message.svg?url";
+import optionsIcon from "/assets/options.svg?url";
+import logoutIcon from "/assets/log-out.svg?url";
 
 const addScrollbar = () => {
   document.body.classList.remove("removeScroll");

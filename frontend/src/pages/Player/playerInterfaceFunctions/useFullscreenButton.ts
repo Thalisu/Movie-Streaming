@@ -1,6 +1,6 @@
 import { useState } from "react";
-import openFullscreen from "../../../assets/icons/notFullscreenMode.svg";
-import closeFullscreen from "../../../assets/icons/onFullscreenMode.svg";
+import openFullscreen from "/assets/notFullscreenMode.svg?url";
+import closeFullscreen from "/assets/onFullscreenMode.svg?url";
 
 const useFullscreenButton = (
   containerRef: React.MutableRefObject<HTMLDivElement | null>

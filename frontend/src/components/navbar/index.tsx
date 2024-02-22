@@ -7,8 +7,8 @@ import {
   Anchor,
 } from "./style";
 
-import searchIcon from "../../assets/icons/search.svg";
-import bellIcon from "../../assets/icons/bell.svg";
+import searchIcon from "/assets/search.svg?url";
+import bellIcon from "/assets/bell.svg?url";
 import { useEffect, useState } from "react";
 
 const Navbar = () => {

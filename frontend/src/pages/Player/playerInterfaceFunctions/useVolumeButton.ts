@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { YouTubePlayer } from "youtube-player/dist/types";
 
-import volumeMuted from "../../../assets/icons/volumeMuted.svg";
-import volumeLow from "../../../assets/icons/volumeLow.svg";
-import volumeHigh from "../../../assets/icons/volumeHigh.svg";
+import volumeMuted from "/assets/volumeMuted.svg?url";
+import volumeLow from "/assets/volumeLow.svg?url";
+import volumeHigh from "/assets/volumeHigh.svg?url";
 
 const useVolumeButton = (player: YouTubePlayer | null) => {
   const [isMuted, setIsMuted] = useState(false);

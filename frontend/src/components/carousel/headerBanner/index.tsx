@@ -6,7 +6,7 @@ import {
   Button,
 } from "./style";
 
-import arrow from "../../../assets/icons/arrow.svg";
+import arrow from "/assets/arrow.svg?url";
 
 import BannerCarousel from "./Banner";
 import Markers from "../../markers/Markers";

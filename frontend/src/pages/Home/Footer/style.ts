@@ -9,6 +9,7 @@ export const Container = styled.footer`
   height: 30svh;
   width: 100%;
   background: ${theme.colors.darkGradient};
+  overflow-x: hidden;
 `;
 
 export const Span = styled.span`

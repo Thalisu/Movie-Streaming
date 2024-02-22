@@ -92,8 +92,10 @@ export const Container = styled.div<{ $isOnPlayer: boolean }>`
   height: 100svh;
   background-color: ${theme.colors.background};
   overflow: hidden;
-  display: ${({ $isOnPlayer }) => ($isOnPlayer ? "block" : "none")};
+  pointer-events: ${({ $isOnPlayer }) => ($isOnPlayer ? "all" : "none")};
+  opacity: ${({ $isOnPlayer }) => ($isOnPlayer ? "1" : "0")};
   z-index: 1;
+  transition: opacity 0.3s ease-in-out;
   cursor: none;
   &.moved
     ${TopBarContainer},

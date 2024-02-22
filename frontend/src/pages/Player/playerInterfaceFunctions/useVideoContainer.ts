@@ -19,7 +19,6 @@ const useContainerMousemove = () => {
     };
     timeout.current = setTimeout(() => removeMenu(), 3000);
   };
-  console.log("reload");
 
   return {
     hideShowInterface,

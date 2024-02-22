@@ -6,7 +6,7 @@ import {
   Button,
 } from "./style";
 
-import arrow from "../../../assets/icons/arrow.svg";
+import arrow from "/assets/arrow.svg?url";
 import Cards from "./Card";
 
 const Carousel_2_3 = () => {

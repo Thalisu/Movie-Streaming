@@ -8,7 +8,7 @@ import {
   MovieInfo,
 } from "./style";
 
-import heart from "../../assets/icons/heart.svg";
+import heart from "/assets/heart.svg?url";
 import { Movie } from "../../types";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

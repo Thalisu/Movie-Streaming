@@ -6,8 +6,8 @@ import {
   DurationContainer,
 } from "./style";
 
-import skipLeft from "../../../assets/icons/skipLeft.svg";
-import skipRight from "../../../assets/icons/skipRight.svg";
+import skipLeft from "/assets/skipLeft.svg?url";
+import skipRight from "/assets/skipRight.svg?url";
 
 import { ControlsProps } from "../../../types";
 import playPauseButton from "../playerInterfaceFunctions/playPauseButton";

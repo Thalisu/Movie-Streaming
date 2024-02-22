@@ -1,5 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 import {
   Container,
@@ -13,23 +12,16 @@ import {
 import Controls from "./controls";
 import Timeline from "./timeline";
 
-import exitIcon from "../../assets/icons/exitPlayer.svg";
+import exitIcon from "/assets/exitPlayer.svg?url";
 
 import useIframeAPI from "./useIframeAPI";
 
 import useContainerMousemove from "./playerInterfaceFunctions/useVideoContainer";
 import playPauseButton from "./playerInterfaceFunctions/playPauseButton";
+import useUrlLocation from "./useUrlLocation";
 
 const Player = (): JSX.Element => {
-  const location = useLocation();
-  const [isOnPlayer, setIsOnPlayer] = useState(false);
-  useEffect(() => {
-    if (location.pathname.includes("player")) {
-      setIsOnPlayer(true);
-    } else {
-      setIsOnPlayer(false);
-    }
-  }, [location]);
+  const { isOnPlayer } = useUrlLocation();
   const api = useIframeAPI();
   const { hideShowInterface, containerRef } = useContainerMousemove();
 
