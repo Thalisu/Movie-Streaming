@@ -25,7 +25,7 @@ const addScrollbar = () => {
   document.body.classList.remove("removeScroll");
 };
 
-const Aside = () => {
+const Aside = (): React.JSX.Element => {
   return (
     <>
       <ToggleMenu type="checkbox" id="navbarMenu" />

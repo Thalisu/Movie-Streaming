@@ -20,7 +20,7 @@ import useIframeAPI from "./useIframeAPI";
 import useContainerMousemove from "./playerInterfaceFunctions/useVideoContainer";
 import playPauseButton from "./playerInterfaceFunctions/playPauseButton";
 
-const Player = () => {
+const Player = (): JSX.Element => {
   const location = useLocation();
   const [isOnPlayer, setIsOnPlayer] = useState(false);
   useEffect(() => {
