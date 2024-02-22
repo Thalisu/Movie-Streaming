@@ -2,7 +2,7 @@ import Carousel from "../../../components/carousel/headerBanner";
 import Navbar from "../../../components/navbar";
 import { HeaderContainer } from "./style";
 
-const Header = (): JSX.Element => {
+const Header = () => {
   return (
     <>
       <Navbar />
@@ -14,4 +14,3 @@ const Header = (): JSX.Element => {
 };
 
 export default Header;
-
