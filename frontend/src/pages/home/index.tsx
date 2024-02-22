@@ -1,7 +1,7 @@
-import Header from "./Header/index.tsx";
-import Main from "./Main/index.tsx";
-import Footer from "./Footer/index.tsx";
-import Aside from "../../components/Aside/index.tsx";
+import Header from "./Header";
+import Main from "./Main";
+import Footer from "./Footer";
+import Aside from "../../components/Aside";
 
 const Home = () => (
   <>
