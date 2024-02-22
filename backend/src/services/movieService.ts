@@ -26,7 +26,14 @@ const treatData = async (
       const popularity = movie.popularity;
       const id = movie.id;
       let video;
-      if (isUpcoming) video = await getMovieVideo(id);
+      if (isUpcoming) {
+        try {
+          video = await getMovieVideo(id);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+      console.log("test");
 
       return new Movie({
         title,
