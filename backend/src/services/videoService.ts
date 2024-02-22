@@ -1,7 +1,7 @@
 import axios from "axios";
 import { MovieVideosResponse } from "../types";
 
-const baseUrl = "http://localhost:3003/api/media/videos";
+const baseUrl = "/api/media/videos";
 
 const getMovieVideo = async (id: number) => {
   const response = await axios.get<MovieVideosResponse>(`${baseUrl}/${id}`);
