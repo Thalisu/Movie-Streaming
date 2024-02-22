@@ -6,10 +6,11 @@ export const Container = styled.main`
   position: relative;
   flex-direction: column;
   width: 100svw;
-  padding-bottom:4rem;
+  padding-bottom: 4rem;
   background-image: ${theme.colors.darkGradient};
   flex-shrink: 99;
   z-index: 0;
+  overflow-x: hidden;
   &::before {
     content: "";
     position: absolute;

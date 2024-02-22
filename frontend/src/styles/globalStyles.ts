@@ -10,6 +10,9 @@ ${resetCss}
  font-family: ${theme.fonts.poppins};
  text-rendering: optimizeSpeed;
 }
+html{
+  overflow-x: hidden;
+}
 .removeScroll {
   height: 100svh;
   overflow: hidden;

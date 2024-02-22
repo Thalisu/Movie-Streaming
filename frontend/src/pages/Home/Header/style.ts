@@ -14,4 +14,5 @@ export const HeaderContainer = styled.header`
   background-position: center;
   z-index: 0;
   flex-shrink: 1;
+  overflow-x: hidden;
 `;

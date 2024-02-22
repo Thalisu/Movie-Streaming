@@ -443,6 +443,7 @@ Error generating stack: `+o.message+`
   background-position: center;
   z-index: 0;
   flex-shrink: 1;
+  overflow-x: hidden;
 `,XS=()=>y.jsxs(y.Fragment,{children:[y.jsx(GS,{}),y.jsx(qS,{children:y.jsx(DS,{})})]}),YS=T.ul`
   display: flex;
   align-items: center;
@@ -770,10 +771,11 @@ Error generating stack: `+o.message+`
   position: relative;
   flex-direction: column;
   width: 100svw;
-  padding-bottom:4rem;
+  padding-bottom: 4rem;
   background-image: ${b.colors.darkGradient};
   flex-shrink: 99;
   z-index: 0;
+  overflow-x: hidden;
   &::before {
     content: "";
     position: absolute;
@@ -1125,6 +1127,9 @@ ${CC}
 *{
  font-family: ${b.fonts.poppins};
  text-rendering: optimizeSpeed;
+}
+html{
+  overflow-x: hidden;
 }
 .removeScroll {
   height: 100svh;
