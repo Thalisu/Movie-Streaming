@@ -26,9 +26,10 @@ moviesRouter.get("/:type/:quantity/:after?", async (req, res) => {
   const quantity = parseNumber(req.params.quantity);
 
   const url = `${config.BASE_URL}movie/${type}?api_key=${config.API_KEY}`;
+  const hostUrl = `${req.protocol}://${req.get("host")}`;
 
   /*   if (isNumber(req.params.after)) info("todo"); */
-  const movies = await getMovies(quantity, url, type);
+  const movies = await getMovies(quantity, url, type, hostUrl);
 
   res.json(movies);
 });

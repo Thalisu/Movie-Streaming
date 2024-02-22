@@ -1,11 +1,13 @@
 import axios from "axios";
 import { MovieVideosResponse } from "../types";
 
-const baseUrl = "/api/media/videos";
-
-const getMovieVideo = async (id: number) => {
-  const response = await axios.get<MovieVideosResponse>(`${baseUrl}/${id}`);
+const getMovieVideo = async (id: number, hostUrl: string | undefined) => {
+  const response = await axios.get<MovieVideosResponse>(
+    `${hostUrl}/api/media/videos/${id}`
+  );
   const movieVideosData = response.data.results;
+
+  console.log(hostUrl);
 
   const video = movieVideosData.find((v) => v.type.includes("Trailer"));
   return video?.key;

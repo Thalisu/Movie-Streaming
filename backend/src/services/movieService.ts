@@ -5,7 +5,8 @@ import getMovieVideo from "./videoService";
 
 const treatData = async (
   movies: MovieData[],
-  isUpcoming: boolean
+  isUpcoming: boolean,
+  hostUrl: string | undefined
 ): Promise<Movie[]> => {
   const moviesData = await Promise.all(
     movies.map(async (movie) => {
@@ -27,11 +28,7 @@ const treatData = async (
       const id = movie.id;
       let video;
       if (isUpcoming) {
-        try {
-          video = await getMovieVideo(id);
-        } catch (error) {
-          console.log(error);
-        }
+        video = await getMovieVideo(id, hostUrl);
       }
       console.log("test");
 
@@ -58,7 +55,12 @@ const getMovieData = (data: MovieData[], type?: Type) => {
     : data;
 };
 
-export const getMovies = async (quantity: number, url: string, type?: Type) => {
+export const getMovies = async (
+  quantity: number,
+  url: string,
+  type?: Type,
+  hostUrl?: string
+) => {
   const { data } = await axios.get<MovieResponse>(url);
   const maxPages = data.total_pages;
 
@@ -73,5 +75,9 @@ export const getMovies = async (quantity: number, url: string, type?: Type) => {
     }
   }
 
-  return treatData(movieData.slice(0, quantity), type === Type.Upcoming);
+  return treatData(
+    movieData.slice(0, quantity),
+    type === Type.Upcoming,
+    hostUrl
+  );
 };
