@@ -99,8 +99,8 @@ export const LoadingContainer = styled.div`
   position: relative;
   display: flex;
   justify-content: center;
-  align-content: center;
-  width: 100svw;
+  align-items: center;
+  width: 100%;
   height: 100%;
   background-color: ${theme.colors.background};
   &::after {
@@ -116,9 +116,6 @@ export const LoadingContainer = styled.div`
 
 export const LoadingCard = styled.div`
   position: relative;
-  display: flex;
-  justify-content: center;
-  align-content: center;
   width: 200px;
   height: 200px;
   border-radius: 50%;
@@ -130,7 +127,7 @@ export const LoadingCard = styled.div`
     rgb(121, 0, 194),
     rgb(244, 101, 252)
   );
-  animation: loading 2s ease-in-out 3s infinite;
+  animation: loading 2s ease-in-out infinite;
   &::after {
     content: "";
     position: absolute;
@@ -140,14 +137,6 @@ export const LoadingCard = styled.div`
     bottom: 6px;
     background-color: ${theme.colors.background};
     border-radius: 50%;
-  }
-  @keyframes loading {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
   }
 `;
 
