@@ -30,7 +30,6 @@ const treatData = async (
       if (isUpcoming) {
         video = await getMovieVideo(id, hostUrl);
       }
-      console.log("test");
 
       return new Movie({
         title,

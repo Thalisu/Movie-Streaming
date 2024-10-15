@@ -11,7 +11,6 @@ genresRouter.get("/", async (_req, res) => {
   const response = await axios.get(
     `${config.BASE_URL}genre/movie/list?api_key=${config.API_KEY}`
   );
-  console.log(response.data);
   res.json(response.data);
 });
 
